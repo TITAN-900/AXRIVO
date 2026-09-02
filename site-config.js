@@ -5,8 +5,8 @@
   const siteConfig = {
     brandName: "AXRIVO",
     companyName: "AXRIVO",
-    domain: "",
-    siteUrl: "",
+    domain: "axrivo.vercel.app",
+    siteUrl: "https://axrivo.vercel.app",
     phone: "PLACEHOLDER_PHONE",
     companyWhatsApp: "PLACEHOLDER_WHATSAPP_NUMBER",
     email: "PLACEHOLDER_EMAIL",
@@ -59,7 +59,7 @@
       return window.location.origin.replace(/\/+$/, "");
     }
 
-    return "http://localhost:4173";
+    return "https://axrivo.vercel.app";
   };
 
   const splitUrlParts = (value) => {

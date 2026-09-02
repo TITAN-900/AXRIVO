@@ -19,12 +19,12 @@ const parseArgs = () => {
 
 const createBrowserLikeContext = () => {
   const window = {
-    location: new URL("http://localhost:4173/"),
+    location: new URL("https://axrivo.vercel.app/"),
     addEventListener() {}
   };
   const document = {
     currentScript: {
-      src: "http://localhost:4173/site-config.js"
+      src: "https://axrivo.vercel.app/site-config.js"
     },
     querySelector() {
       return null;
@@ -267,7 +267,7 @@ const sitemapStatus = (products, catalog, siteConfig) => {
   }
 
   const sitemap = fs.readFileSync(sitemapPath, "utf8");
-  const cleanSiteUrl = String(siteConfig.siteUrl || "http://localhost:4173").replace(/\/+$/, "");
+  const cleanSiteUrl = String(siteConfig.siteUrl || "https://axrivo.vercel.app").replace(/\/+$/, "");
   const missing = products
     .filter((product) => product.status !== "draft")
     .filter((product) => !String(catalog.buildProductSeo(product).robots).toLowerCase().includes("noindex"))

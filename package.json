@@ -7,7 +7,7 @@
     "dev": "node tools/dev-server.js",
     "build": "node tools/build-static-site.js",
     "preview": "node tools/dev-server.js --root dist --port 4174",
-    "validate": "node tools/validate-hosting.js && node tools/product-import-audit.js && node tools/generate-sitemap.js --check --lastmod 2026-09-02 --site-url http://localhost:4173"
+    "validate": "node tools/validate-hosting.js && node tools/product-import-audit.js && node tools/generate-sitemap.js --check --lastmod 2026-09-02 --site-url https://axrivo.vercel.app"
   },
   "engines": {
     "node": ">=18"

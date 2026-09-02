@@ -49,10 +49,10 @@ Set `SITE_URL` in Vercel Environment Variables after creating the Vercel project
 For local builds, copy `.env.example` to `.env` and set:
 
 ```bash
-SITE_URL=https://your-vercel-project.vercel.app
+SITE_URL=https://axrivo.vercel.app
 ```
 
-When the final AXRIVO domain is ready, update `SITE_URL` in Vercel and bind the domain there. Do not permanently hardcode a temporary Vercel URL in source files.
+The current temporary deployment URL is `https://axrivo.vercel.app`. When the final AXRIVO domain is ready, update `SITE_URL` in Vercel, `site-config.js` and `.env.example`, then bind the domain there.
 
 ## Configuration
 

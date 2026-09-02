@@ -32,12 +32,12 @@ const parseArgs = () => {
 
 const createBrowserLikeContext = () => {
   const window = {
-    location: new URL("http://localhost:4173/"),
+    location: new URL("https://axrivo.vercel.app/"),
     addEventListener() {}
   };
   const document = {
     currentScript: {
-      src: "http://localhost:4173/site-config.js"
+      src: "https://axrivo.vercel.app/site-config.js"
     },
     querySelector() {
       return null;
@@ -94,7 +94,7 @@ const resolveSiteUrl = (siteConfig, siteUrlOption) => {
     process.env.VERCEL_PROJECT_PRODUCTION_URL,
     process.env.VERCEL_URL,
     siteConfig.siteUrl,
-    "http://localhost:4173"
+    "https://axrivo.vercel.app"
   ];
   const value = candidates.find((candidate) => String(candidate || "").trim());
 

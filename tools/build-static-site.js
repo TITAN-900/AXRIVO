@@ -66,12 +66,21 @@ const loadDotEnv = () => {
 
 const withProtocol = (value) => (/^https?:\/\//i.test(value) ? value : `https://${value}`);
 
+const configuredSiteUrl = () => {
+  const configPath = path.join(siteRoot, "site-config.js");
+  const text = fs.existsSync(configPath) ? fs.readFileSync(configPath, "utf8") : "";
+  const match = text.match(/\bsiteUrl:\s*"([^"]+)"/);
+
+  return match?.[1] || "";
+};
+
 const resolveSiteUrl = () => {
   const value =
     process.env.SITE_URL ||
     process.env.VERCEL_PROJECT_PRODUCTION_URL ||
     process.env.VERCEL_URL ||
-    "http://localhost:4173";
+    configuredSiteUrl() ||
+    "https://axrivo.vercel.app";
 
   return withProtocol(String(value).trim()).replace(/\/+$/, "");
 };

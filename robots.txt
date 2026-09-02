@@ -3,4 +3,4 @@ Allow: /
 Allow: /assets/
 Disallow: /search/
 
-Sitemap: http://localhost:4173/sitemap.xml
+Sitemap: https://axrivo.vercel.app/sitemap.xml
