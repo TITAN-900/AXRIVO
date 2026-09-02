@@ -4,6 +4,20 @@ These instructions are permanent for AXRIVO work in this project.
 
 When the user asks to add products, import product images, add items to Car Parts, add items to Heavy Truck Parts, or "put these products on the website", default to the full Product Import SEO + GEO workflow unless the user explicitly says "do not do SEO/GEO".
 
+## Deployment Workflow
+
+After completing any AXRIVO website modification, unless the user explicitly says "do not push":
+
+- Check the change for obvious errors.
+- Run production validation and build.
+- If validation or build fails, fix the issue first and do not push.
+- Stage the completed change with `git add`.
+- Create a clear Git commit.
+- Push to GitHub `origin main`.
+- Let Vercel auto-deploy from the pushed `main` branch.
+
+Do not create meaningless commits when there are no actual changes.
+
 ## Product Import Rule
 
 Do not only display uploaded product images. A product import must cover:
