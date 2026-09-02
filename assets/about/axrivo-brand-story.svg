@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1120" role="img" aria-label="AXRIVO warehouse and spare parts placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fffaf4"/>
+      <stop offset=".54" stop-color="#cfd1cf"/>
+      <stop offset="1" stop-color="#34383b"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f8f4ec"/>
+      <stop offset=".46" stop-color="#90999f"/>
+      <stop offset="1" stop-color="#202326"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="44" stdDeviation="38" flood-color="#14171a" flood-opacity=".28"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="1120" fill="url(#bg)"/>
+  <g opacity=".15" stroke="#202326" stroke-width="2">
+    <path d="M120 180h1360M80 420h1420M120 720h1340M180 940h1220"/>
+    <path d="M250 80v920M520 40v1010M810 100v920M1090 60v990M1350 140v820"/>
+  </g>
+  <path d="M1120 0h170L560 1120H390z" fill="#ff5a1f" opacity=".16"/>
+  <g filter="url(#shadow)">
+    <path d="M250 270h1010l110 560H160z" fill="#202326" opacity=".7"/>
+    <path d="M300 210h900l80 120H220z" fill="url(#metal)"/>
+    <g transform="translate(270 365)">
+      <rect width="275" height="360" rx="16" fill="#f7f2ea" opacity=".9"/>
+      <rect x="38" y="55" width="200" height="62" rx="10" fill="#202326" opacity=".8"/>
+      <rect x="38" y="156" width="200" height="42" rx="8" fill="#8e979e"/>
+      <rect x="38" y="230" width="200" height="42" rx="8" fill="#8e979e" opacity=".72"/>
+    </g>
+    <g transform="translate(610 365)">
+      <rect width="275" height="360" rx="16" fill="#f7f2ea" opacity=".82"/>
+      <rect x="38" y="55" width="200" height="62" rx="10" fill="#202326" opacity=".8"/>
+      <rect x="38" y="156" width="200" height="42" rx="8" fill="#8e979e"/>
+      <rect x="38" y="230" width="200" height="42" rx="8" fill="#8e979e" opacity=".72"/>
+    </g>
+    <g transform="translate(950 365)">
+      <rect width="275" height="360" rx="16" fill="#f7f2ea" opacity=".76"/>
+      <rect x="38" y="55" width="200" height="62" rx="10" fill="#202326" opacity=".8"/>
+      <rect x="38" y="156" width="200" height="42" rx="8" fill="#8e979e"/>
+      <rect x="38" y="230" width="200" height="42" rx="8" fill="#8e979e" opacity=".72"/>
+    </g>
+    <path d="M180 820h980M1230 820h160" stroke="#ff5a1f" stroke-width="24" stroke-linecap="square"/>
+  </g>
+  <rect y="820" width="1600" height="300" fill="#14171a" opacity=".26"/>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Cooling system placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fbf8f2"/>
+      <stop offset=".55" stop-color="#b8bab7"/>
+      <stop offset="1" stop-color="#202326"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" x2="1">
+      <stop offset="0" stop-color="#fbf8f2"/>
+      <stop offset=".5" stop-color="#9aa0a3"/>
+      <stop offset="1" stop-color="#232629"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="40" stdDeviation="28" flood-color="#101214" flood-opacity=".34"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <g opacity=".14" stroke="#202326" stroke-width="2">
+    <path d="M130 210h1320M90 480h1380M230 740h1110"/>
+    <path d="M360 80v820M790 30v860M1200 90v780"/>
+  </g>
+  <g filter="url(#shadow)" transform="translate(380 190) skewX(-7)">
+    <rect x="120" y="100" width="820" height="520" rx="34" fill="url(#metal)"/>
+    <rect x="200" y="170" width="660" height="380" rx="18" fill="#202326" opacity=".82"/>
+    <g stroke="#f7f2ea" stroke-width="18" opacity=".52">
+      <path d="M250 205v310M320 205v310M390 205v310M460 205v310M530 205v310M600 205v310M670 205v310M740 205v310M810 205v310"/>
+    </g>
+    <path d="M120 650h250M700 650h240" stroke="#ff5a1f" stroke-width="26" stroke-linecap="square"/>
+  </g>
+  <path d="M0 680h1600v320H0z" fill="#15181b" opacity=".23"/>
+</svg>

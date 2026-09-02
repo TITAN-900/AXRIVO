@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Suspension placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f7f2ea"/>
+      <stop offset=".5" stop-color="#bfc2c1"/>
+      <stop offset="1" stop-color="#202326"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" x2="1">
+      <stop offset="0" stop-color="#f6f1e9"/>
+      <stop offset=".44" stop-color="#8f979b"/>
+      <stop offset="1" stop-color="#222629"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="40" stdDeviation="26" flood-color="#111416" flood-opacity=".35"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <g opacity=".15" stroke="#202326" stroke-width="2">
+    <path d="M120 190h1320M180 460h1250M110 730h1370"/>
+    <path d="M350 70v850M780 60v850M1210 40v850"/>
+  </g>
+  <path d="M1040 0h130L580 1000H450z" fill="#ff5a1f" opacity=".18"/>
+  <g filter="url(#shadow)" transform="translate(510 100) rotate(-9 280 400)">
+    <rect x="250" y="30" width="150" height="760" rx="64" fill="url(#metal)"/>
+    <path d="M170 190c170-120 430-10 290 110-128 110-364-24-214-136 140-105 388-14 270 110-118 123-382-4-250-128 125-118 390-4 276 120-100 110-350 10-250-110" fill="none" stroke="#202326" stroke-width="58" stroke-linecap="round"/>
+    <rect x="215" y="0" width="220" height="86" rx="22" fill="#202326"/>
+    <rect x="210" y="720" width="230" height="94" rx="24" fill="#202326"/>
+    <path d="M140 824h420" stroke="#ff5a1f" stroke-width="26" stroke-linecap="square"/>
+  </g>
+  <rect y="690" width="1600" height="310" fill="#111416" opacity=".24"/>
+</svg>

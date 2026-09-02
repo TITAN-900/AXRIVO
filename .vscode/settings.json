@@ -1,0 +1,9 @@
+{
+  "files.eol": "\n",
+  "editor.formatOnSave": false,
+  "search.exclude": {
+    "dist": true,
+    "node_modules": true,
+    ".vercel": true
+  }
+}

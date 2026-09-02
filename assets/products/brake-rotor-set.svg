@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1000" role="img" aria-label="Brake rotor set placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fffaf4"/>
+      <stop offset=".6" stop-color="#d4d6d4"/>
+      <stop offset="1" stop-color="#8e979e"/>
+    </linearGradient>
+    <radialGradient id="rotor" cx=".48" cy=".46" r=".62">
+      <stop offset="0" stop-color="#fbf8f2"/>
+      <stop offset=".42" stop-color="#a7adb0"/>
+      <stop offset=".76" stop-color="#5b6266"/>
+      <stop offset="1" stop-color="#202326"/>
+    </radialGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="28" stdDeviation="28" flood-color="#202326" flood-opacity=".22"/>
+    </filter>
+  </defs>
+  <rect width="1400" height="1000" fill="url(#bg)"/>
+  <g opacity=".15" stroke="#202326" stroke-width="2">
+    <path d="M120 230h1160M160 510h1080M120 780h1160"/>
+    <path d="M320 100v780M700 60v840M1080 120v760"/>
+  </g>
+  <g filter="url(#shadow)" transform="translate(345 135)">
+    <circle cx="365" cy="365" r="290" fill="url(#rotor)"/>
+    <circle cx="365" cy="365" r="152" fill="#202326" opacity=".84"/>
+    <circle cx="365" cy="365" r="64" fill="#fffaf4"/>
+    <g fill="#202326" opacity=".4">
+      <circle cx="365" cy="158" r="22"/>
+      <circle cx="572" cy="365" r="22"/>
+      <circle cx="365" cy="572" r="22"/>
+      <circle cx="158" cy="365" r="22"/>
+    </g>
+    <path d="M595 185c78 88 88 244 26 356l132 54c91-160 72-368-52-504z" fill="#ff5a1f"/>
+  </g>
+</svg>

@@ -1,0 +1,51 @@
+{
+  "id": "",
+  "slug": "",
+  "name": "",
+  "sku": "",
+  "vehicleType": "",
+  "category": "",
+  "subcategory": "",
+  "brand": "",
+  "manufacturer": "",
+  "partNumber": "",
+  "oemNumbers": [],
+  "vehicleBrand": "",
+  "vehicleBrands": [],
+  "vehicleModels": [],
+  "engineModels": [],
+  "yearFrom": "",
+  "yearTo": "",
+  "position": "",
+  "application": "",
+  "weight": "",
+  "dimensions": "",
+  "material": "",
+  "shortDescription": "",
+  "description": "",
+  "features": [],
+  "compatibility": [],
+  "keywords": [],
+  "mainImage": "",
+  "images": [],
+  "imageAlt": "",
+  "imageSeo": {
+    "altText": "",
+    "caption": "",
+    "filename": ""
+  },
+  "seo": {
+    "title": "",
+    "description": "",
+    "canonicalPath": "",
+    "keywords": [],
+    "robots": "index,follow"
+  },
+  "geo": {
+    "entities": [],
+    "entityRelations": [],
+    "answerSummary": ""
+  },
+  "relatedProducts": [],
+  "status": "draft"
+}
