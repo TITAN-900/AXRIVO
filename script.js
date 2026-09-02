@@ -20,6 +20,10 @@ const scrollRevealSections = document.querySelectorAll("[data-scroll-section]");
 const newsletterForm = document.querySelector("[data-newsletter-form]");
 const searchButtons = document.querySelectorAll(".icon-button[aria-label='Search']");
 const siteConfigFields = document.querySelectorAll("[data-config-field]");
+const heroSlider = document.querySelector("[data-hero-slider]");
+const heroSlides = document.querySelectorAll("[data-hero-slide]");
+const heroCopies = document.querySelectorAll("[data-hero-copy]");
+const heroControls = document.querySelectorAll("[data-hero-control]");
 
 const escapeHtml = (value) =>
   String(value ?? "")
@@ -305,10 +309,129 @@ const setMenuOpen = (isOpen) => {
   menuToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
 };
 
+const setupHeroSlider = () => {
+  if (!heroSlider || heroSlides.length < 2 || heroSlides.length !== heroCopies.length) {
+    return;
+  }
+
+  const autoplayDelay = 5000;
+  const transitionLock = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 280 : 980;
+  let activeIndex = [...heroSlides].findIndex((slide) => slide.classList.contains("is-active"));
+  let autoplayTimer = 0;
+  let exitTimer = 0;
+  let pointerStartX = 0;
+  let pointerStartY = 0;
+
+  if (activeIndex < 0) {
+    activeIndex = 0;
+  }
+
+  const syncControls = () => {
+    heroControls.forEach((control, index) => {
+      const isActive = index === activeIndex;
+      control.classList.toggle("is-active", isActive);
+      control.setAttribute("aria-current", isActive ? "true" : "false");
+      control.setAttribute("aria-selected", String(isActive));
+    });
+  };
+
+  const scheduleAutoplay = () => {
+    window.clearTimeout(autoplayTimer);
+    autoplayTimer = window.setTimeout(() => {
+      goToSlide(activeIndex + 1);
+    }, autoplayDelay);
+  };
+
+  function goToSlide(index) {
+    const nextIndex = (index + heroSlides.length) % heroSlides.length;
+
+    if (nextIndex === activeIndex) {
+      scheduleAutoplay();
+      return;
+    }
+
+    const currentSlide = heroSlides[activeIndex];
+    const currentCopy = heroCopies[activeIndex];
+    const nextSlide = heroSlides[nextIndex];
+    const nextCopy = heroCopies[nextIndex];
+
+    window.clearTimeout(exitTimer);
+
+    currentSlide?.classList.remove("is-active");
+    currentSlide?.classList.add("is-exiting");
+    currentSlide?.setAttribute("aria-hidden", "true");
+    currentCopy?.classList.remove("is-active");
+    currentCopy?.classList.add("is-exiting");
+    currentCopy?.setAttribute("aria-hidden", "true");
+
+    nextSlide?.classList.remove("is-exiting");
+    nextSlide?.classList.add("is-active");
+    nextSlide?.setAttribute("aria-hidden", "false");
+    nextCopy?.classList.remove("is-exiting");
+    nextCopy?.classList.add("is-active");
+    nextCopy?.setAttribute("aria-hidden", "false");
+
+    activeIndex = nextIndex;
+    syncControls();
+
+    exitTimer = window.setTimeout(() => {
+      heroSlides.forEach((slide, slideIndex) => {
+        if (slideIndex !== activeIndex) {
+          slide.classList.remove("is-exiting");
+          slide.setAttribute("aria-hidden", "true");
+        }
+      });
+
+      heroCopies.forEach((copy, copyIndex) => {
+        if (copyIndex !== activeIndex) {
+          copy.classList.remove("is-exiting");
+          copy.setAttribute("aria-hidden", "true");
+        }
+      });
+    }, transitionLock);
+
+    scheduleAutoplay();
+  }
+
+  heroControls.forEach((control) => {
+    control.addEventListener("click", () => {
+      goToSlide(Number(control.dataset.heroControl || 0));
+    });
+  });
+
+  heroSlider.addEventListener("pointerdown", (event) => {
+    pointerStartX = event.clientX;
+    pointerStartY = event.clientY;
+  });
+
+  heroSlider.addEventListener("pointerup", (event) => {
+    const deltaX = event.clientX - pointerStartX;
+    const deltaY = event.clientY - pointerStartY;
+
+    if (Math.abs(deltaX) < 56 || Math.abs(deltaX) < Math.abs(deltaY)) {
+      return;
+    }
+
+    goToSlide(activeIndex + (deltaX < 0 ? 1 : -1));
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      window.clearTimeout(autoplayTimer);
+    } else {
+      scheduleAutoplay();
+    }
+  });
+
+  syncControls();
+  scheduleAutoplay();
+};
+
 window.addEventListener("scroll", syncHeader, { passive: true });
 syncHeader();
 ensureHomeNavigation();
 upgradeHostedLinks();
+setupHeroSlider();
 window.setTimeout(syncActiveNavigation, 0);
 window.addEventListener("pageshow", syncActiveNavigation);
 

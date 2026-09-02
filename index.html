@@ -26,6 +26,9 @@
       href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800&family=Rajdhani:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="preload" as="image" href="./images/hero/warehouse.png" fetchpriority="high" />
+    <link rel="prefetch" as="image" href="./images/hero/passenger-car-workshop.png" />
+    <link rel="prefetch" as="image" href="./images/hero/heavy-truck-workshop.png" />
     <link rel="stylesheet" href="./styles.css" />
     <script type="application/ld+json">
       {
@@ -111,85 +114,111 @@
     </header>
 
     <main>
-      <section class="hero-section" aria-labelledby="hero-title">
-        <div class="hero-texture" aria-hidden="true"></div>
-        <div class="container hero-grid">
-          <div class="hero-copy">
-            <p class="eyebrow">Passenger Car Parts / Heavy Truck Parts</p>
+      <section class="hero-section" aria-labelledby="hero-title" data-hero-slider>
+        <div class="hero-slides" aria-live="polite">
+          <article class="hero-slide hero-slide-warehouse is-active" data-hero-slide aria-hidden="false">
+            <img
+              src="./images/hero/warehouse.png"
+              alt="AXRIVO warehouse shelves stocked with automotive and heavy vehicle parts"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </article>
+
+          <article class="hero-slide hero-slide-car" data-hero-slide aria-hidden="true">
+            <img
+              src="./images/hero/passenger-car-workshop.png"
+              alt="Passenger car workshop service for AXRIVO car parts"
+              decoding="async"
+            />
+          </article>
+
+          <article class="hero-slide hero-slide-truck" data-hero-slide aria-hidden="true">
+            <img
+              src="./images/hero/heavy-truck-workshop.png"
+              alt="Heavy truck workshop service for AXRIVO heavy truck parts"
+              decoding="async"
+            />
+          </article>
+        </div>
+
+        <div class="container hero-copy-layer">
+          <div class="hero-copy is-active" data-hero-copy aria-hidden="false">
+            <p class="eyebrow">EXTENSIVE PARTS RANGE</p>
             <h1 id="hero-title">
-              <span>PARTS</span>
-              <span>FOR</span>
-              <span>EVERY</span>
-              <span class="accent-word">ROAD.</span>
+              <span>READY WHEN</span>
+              <span>YOU NEED <span class="accent-word">IT.</span></span>
             </h1>
-            <p class="hero-subtitle">AUTOMOTIVE &amp; HEAVY VEHICLE PARTS</p>
+            <p class="hero-description">
+              A wide range of automotive and heavy vehicle parts,<br />
+              ready to keep your business moving.
+            </p>
           </div>
 
-          <div class="hero-visual" aria-label="AXRIVO serves passenger cars and heavy trucks">
-            <a class="hero-panel hero-panel-car" href="./car-parts/index.html" aria-label="Explore AXRIVO car parts">
-              <img
-                src="./images/hero/car-bmw.jpg"
-                alt="BMW passenger car driving on an urban road for AXRIVO car parts"
-              />
-              <div class="hero-card-copy" aria-hidden="true">
-                <strong>
-                  <span>CAR</span>
-                  <span>PARTS</span>
-                </strong>
-                <span class="hero-card-arrow">→</span>
-              </div>
-            </a>
-            <a class="hero-panel hero-panel-truck" href="./heavy-truck-parts/index.html" aria-label="Explore AXRIVO heavy truck parts">
-              <img
-                src="./images/hero/heavy-truck-quarry.jpg"
-                alt="Heavy truck driving through a quarry for AXRIVO heavy truck parts"
-              />
-              <div class="hero-card-copy" aria-hidden="true">
-                <strong>
-                  <span>HEAVY</span>
-                  <span>TRUCK PARTS</span>
-                </strong>
-                <span class="hero-card-arrow">→</span>
-              </div>
-            </a>
+          <div class="hero-copy" data-hero-copy aria-hidden="true">
+            <p class="eyebrow">PASSENGER CAR PARTS</p>
+            <h1>
+              <span>PARTS THAT</span>
+              <span>KEEP YOU <span class="accent-word">MOVING.</span></span>
+            </h1>
+            <p class="hero-description">
+              Reliable parts for passenger cars,<br />
+              from everyday maintenance to essential repairs.
+            </p>
           </div>
 
-          <div class="performance-mark" aria-hidden="true">
-            <span>//</span>
-            BUILT FOR PERFORMANCE
+          <div class="hero-copy" data-hero-copy aria-hidden="true">
+            <p class="eyebrow">HEAVY TRUCK PARTS</p>
+            <h1>
+              <span>BUILT FOR</span>
+              <span>HEAVY <span class="accent-word">DUTY.</span></span>
+            </h1>
+            <p class="hero-description">
+              Heavy vehicle parts for the machines that work harder,<br />
+              carry further and stay on the road.
+            </p>
           </div>
         </div>
-      </section>
 
-      <section class="finder-section" id="find-your-part" aria-labelledby="finder-title" data-finder-section>
-        <div class="container finder-shell">
-          <div class="finder-heading finder-reveal">
-            <p class="finder-kicker"><span>//</span> Part Search</p>
-            <h2 id="finder-title">FIND THE RIGHT PART</h2>
-            <p>Search by part number, OEM, vehicle or engine.</p>
-          </div>
-
-          <form class="part-search finder-reveal" action="#" aria-label="Find your part" data-part-search>
-            <label class="sr-only" for="part-search-input">
-              Search Part Number, OEM, Product, Vehicle or Engine
-            </label>
-            <div class="part-search-field">
-              <svg aria-hidden="true" viewBox="0 0 24 24">
-                <circle cx="11" cy="11" r="7"></circle>
-                <path d="m16.5 16.5 4 4"></path>
-              </svg>
-              <input
-                id="part-search-input"
-                type="search"
-                placeholder="Search Part Number, OEM, Product, Vehicle or Engine..."
-                autocomplete="off"
-              />
+        <div class="hero-bottom-ui">
+          <div class="container hero-bottom-shell">
+            <div class="hero-controls" role="tablist" aria-label="Homepage hero slides">
+              <button class="hero-control is-active" type="button" data-hero-control="0" aria-label="Show warehouse slide" aria-current="true">
+                <span>01</span>
+                <span class="hero-control-line" aria-hidden="true"></span>
+              </button>
+              <button class="hero-control" type="button" data-hero-control="1" aria-label="Show passenger car slide">
+                <span>02</span>
+                <span class="hero-control-line" aria-hidden="true"></span>
+              </button>
+              <button class="hero-control" type="button" data-hero-control="2" aria-label="Show heavy truck slide">
+                <span>03</span>
+                <span class="hero-control-line" aria-hidden="true"></span>
+              </button>
             </div>
-            <button class="part-search-button" type="submit">
-              <span>SEARCH</span>
-              <span class="finder-arrow" aria-hidden="true">→</span>
-            </button>
-          </form>
+
+            <form class="part-search hero-search" action="#" aria-label="Find your part" data-part-search>
+              <label class="sr-only" for="part-search-input">
+                Search Part Number, OEM, Vehicle or Engine
+              </label>
+              <div class="part-search-field">
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <circle cx="11" cy="11" r="7"></circle>
+                  <path d="m16.5 16.5 4 4"></path>
+                </svg>
+                <input
+                  id="part-search-input"
+                  type="search"
+                  placeholder="Search Part Number, OEM, Vehicle or Engine..."
+                  autocomplete="off"
+                />
+              </div>
+              <button class="part-search-button" type="submit">
+                <span>SEARCH</span>
+                <span class="finder-arrow" aria-hidden="true">→</span>
+              </button>
+            </form>
+          </div>
         </div>
       </section>
     </main>
