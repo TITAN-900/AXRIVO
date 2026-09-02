@@ -198,10 +198,16 @@
             </div>
 
             <form class="part-search hero-search" action="#" aria-label="Find your part" data-part-search>
+              <div class="hero-search-head">
+                <span class="hero-search-label">
+                  <span aria-hidden="true"></span>
+                  FIND YOUR PART
+                </span>
+              </div>
               <label class="sr-only" for="part-search-input">
                 Search Part Number, OEM, Vehicle or Engine
               </label>
-              <div class="part-search-field">
+              <div class="part-search-field hero-search-field">
                 <svg aria-hidden="true" viewBox="0 0 24 24">
                   <circle cx="11" cy="11" r="7"></circle>
                   <path d="m16.5 16.5 4 4"></path>
@@ -213,6 +219,14 @@
                   autocomplete="off"
                 />
               </div>
+              <div class="hero-search-types" role="group" aria-label="Search type">
+                <button class="hero-search-type is-active" type="button" data-search-type-option="all" aria-pressed="true">ALL</button>
+                <button class="hero-search-type" type="button" data-search-type-option="partNumber" aria-pressed="false">PART NO.</button>
+                <button class="hero-search-type" type="button" data-search-type-option="oem" aria-pressed="false">OEM</button>
+                <button class="hero-search-type" type="button" data-search-type-option="vehicle" aria-pressed="false">VEHICLE</button>
+                <button class="hero-search-type" type="button" data-search-type-option="engine" aria-pressed="false">ENGINE</button>
+              </div>
+              <input type="hidden" name="searchType" value="all" data-search-type-value />
               <button class="part-search-button" type="submit">
                 <span>SEARCH</span>
                 <span class="finder-arrow" aria-hidden="true">→</span>

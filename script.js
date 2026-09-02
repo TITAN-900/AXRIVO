@@ -24,6 +24,8 @@ const heroSlider = document.querySelector("[data-hero-slider]");
 const heroSlides = document.querySelectorAll("[data-hero-slide]");
 const heroCopies = document.querySelectorAll("[data-hero-copy]");
 const heroControls = document.querySelectorAll("[data-hero-control]");
+const searchTypeButtons = document.querySelectorAll("[data-search-type-option]");
+const searchTypeValue = document.querySelector("[data-search-type-value]");
 
 const escapeHtml = (value) =>
   String(value ?? "")
@@ -427,6 +429,18 @@ const setupHeroSlider = () => {
   scheduleAutoplay();
 };
 
+const setSearchType = (type = "all") => {
+  searchTypeButtons.forEach((button) => {
+    const isActive = button.dataset.searchTypeOption === type;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+
+  if (searchTypeValue) {
+    searchTypeValue.value = type;
+  }
+};
+
 window.addEventListener("scroll", syncHeader, { passive: true });
 syncHeader();
 ensureHomeNavigation();
@@ -455,9 +469,22 @@ if (partSearchForm) {
   partSearchForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const query = partSearchForm.querySelector("input[type='search']")?.value.trim() ?? "";
-    window.location.href = buildSearchUrl({ q: query });
+    const selectedType = partSearchForm.querySelector("[data-search-type-option].is-active")?.dataset.searchTypeOption ?? searchTypeValue?.value ?? "all";
+    const params = { q: query };
+
+    if (selectedType && selectedType !== "all") {
+      params.searchType = selectedType;
+    }
+
+    window.location.href = buildSearchUrl(params);
   });
 }
+
+searchTypeButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    setSearchType(button.dataset.searchTypeOption);
+  });
+});
 
 if (newsletterForm) {
   newsletterForm.addEventListener("submit", (event) => {
