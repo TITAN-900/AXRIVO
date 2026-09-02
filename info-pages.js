@@ -98,6 +98,7 @@
     document.querySelector('meta[name="description"]')?.setAttribute("content", page.description);
     document.querySelector('meta[property="og:title"]')?.setAttribute("content", page.title);
     document.querySelector('meta[property="og:description"]')?.setAttribute("content", page.description);
+    document.querySelector('meta[property="og:url"]')?.setAttribute("content", helpers?.absoluteUrl(page.canonical) ?? page.canonical);
     document.querySelector('link[rel="canonical"]')?.setAttribute("href", helpers?.absoluteUrl(page.canonical) ?? page.canonical);
 
     const schema = document.querySelector("[data-page-jsonld]");

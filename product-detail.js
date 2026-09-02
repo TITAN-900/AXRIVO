@@ -47,6 +47,11 @@
     document.querySelector("[data-product-description]")?.setAttribute("content", description);
     document.querySelector("[data-product-og-title]")?.setAttribute("content", title);
     document.querySelector("[data-product-og-description]")?.setAttribute("content", description);
+    ensureMeta('meta[property="og:url"]', () => {
+      const meta = document.createElement("meta");
+      meta.setAttribute("property", "og:url");
+      return meta;
+    }).setAttribute("content", canonical);
     ensureMeta('meta[property="og:image"]', () => {
       const meta = document.createElement("meta");
       meta.setAttribute("property", "og:image");

@@ -19,6 +19,7 @@
     document.querySelector('meta[name="description"]')?.setAttribute("content", description);
     document.querySelector('meta[property="og:title"]')?.setAttribute("content", title);
     document.querySelector('meta[property="og:description"]')?.setAttribute("content", description);
+    document.querySelector('meta[property="og:url"]')?.setAttribute("content", helpers?.absoluteUrl(canonicalPath) ?? canonicalPath);
     document.querySelector('link[rel="canonical"]')?.setAttribute("href", helpers?.absoluteUrl(canonicalPath) ?? canonicalPath);
 
     const json = document.querySelector("[data-page-jsonld]");
