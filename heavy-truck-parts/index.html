@@ -19,6 +19,7 @@
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://axrivo.vercel.app/heavy-truck-parts/" />
+    <meta property="og:image" content="https://axrivo.vercel.app/images/pages/heavy-truck-parts/howo-heavy-truck-side-profile.png" />
     <link rel="canonical" href="https://axrivo.vercel.app/heavy-truck-parts/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,6 +27,7 @@
       href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800&family=Rajdhani:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="preload" as="image" href="../images/pages/heavy-truck-parts/howo-heavy-truck-side-profile.png" fetchpriority="high" />
     <link rel="stylesheet" href="../styles.css" />
     <script type="application/ld+json" data-page-jsonld>{}</script>
   </head>
@@ -83,6 +85,14 @@
 
     <main>
       <section class="parts-hero" aria-labelledby="parts-hero-title" data-parts-section>
+        <img
+          class="parts-hero-vehicle parts-hero-vehicle-truck"
+          src="../images/pages/heavy-truck-parts/howo-heavy-truck-side-profile.png"
+          alt="HOWO heavy truck side profile for AXRIVO heavy truck parts"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
         <div class="container parts-hero-grid">
           <div class="parts-hero-copy parts-page-reveal">
             <p class="commerce-kicker"><span>//</span> Heavy Vehicle Platform</p>
@@ -99,19 +109,6 @@
               </a>
             </div>
           </div>
-
-          <figure class="parts-hero-media parts-page-reveal">
-            <img
-              src="../assets/heavy-truck-placeholder.png"
-              alt="Modern heavy truck placeholder for AXRIVO heavy truck parts"
-              loading="eager"
-              decoding="async"
-            />
-            <figcaption>
-              <span>Commercial Platform</span>
-              <strong>Fleet-ready supply</strong>
-            </figcaption>
-          </figure>
         </div>
       </section>
 

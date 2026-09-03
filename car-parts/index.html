@@ -16,6 +16,7 @@
     <meta property="og:description" content="Parts for everyday vehicles, performance and reliability." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://axrivo.vercel.app/car-parts/" />
+    <meta property="og:image" content="https://axrivo.vercel.app/images/pages/car-parts/proton-passenger-car-side-profile.png" />
     <link rel="canonical" href="https://axrivo.vercel.app/car-parts/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,6 +24,7 @@
       href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800&family=Rajdhani:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="preload" as="image" href="../images/pages/car-parts/proton-passenger-car-side-profile.png" fetchpriority="high" />
     <link rel="stylesheet" href="../styles.css" />
     <script type="application/ld+json" data-page-jsonld>{}</script>
   </head>
@@ -80,6 +82,14 @@
 
     <main>
       <section class="parts-hero" aria-labelledby="parts-hero-title" data-parts-section>
+        <img
+          class="parts-hero-vehicle parts-hero-vehicle-car"
+          src="../images/pages/car-parts/proton-passenger-car-side-profile.png"
+          alt="Proton passenger car side profile for AXRIVO car parts"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
         <div class="container parts-hero-grid">
           <div class="parts-hero-copy parts-page-reveal">
             <p class="commerce-kicker"><span>//</span> Passenger Car Parts</p>
@@ -96,19 +106,6 @@
               </a>
             </div>
           </div>
-
-          <figure class="parts-hero-media parts-page-reveal">
-            <img
-              src="../assets/passenger-car-placeholder.png"
-              alt="Modern passenger car placeholder for AXRIVO car parts"
-              loading="eager"
-              decoding="async"
-            />
-            <figcaption>
-              <span>Passenger Platform</span>
-              <strong>Clean daily mobility</strong>
-            </figcaption>
-          </figure>
         </div>
       </section>
 

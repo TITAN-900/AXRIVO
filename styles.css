@@ -3422,6 +3422,7 @@ html.js-ready [data-scroll-section].is-visible .part-five-reveal:nth-child(4) {
 
 .parts-hero {
   position: relative;
+  isolation: isolate;
   overflow: hidden;
   min-height: 78vh;
   padding: calc(var(--header-height) + 42px) 0 var(--space-8);
@@ -3440,10 +3441,12 @@ html.js-ready [data-scroll-section].is-visible .part-five-reveal:nth-child(4) {
 
 .parts-hero::before {
   inset: 0;
+  z-index: 2;
   background:
+    linear-gradient(90deg, rgba(251, 248, 242, 0.96) 0%, rgba(251, 248, 242, 0.82) 44%, rgba(251, 248, 242, 0.22) 100%),
     linear-gradient(90deg, rgba(255, 90, 31, 0.16), transparent 16%),
     linear-gradient(rgba(32, 35, 38, 0.032) 1px, transparent 1px);
-  background-size: 100% 1px, 100% 46px;
+  background-size: auto, 100% 1px, 100% 46px;
   mask-image: linear-gradient(180deg, transparent, #000 12%, #000 82%, transparent);
   opacity: 0.72;
 }
@@ -3452,10 +3455,11 @@ html.js-ready [data-scroll-section].is-visible .part-five-reveal:nth-child(4) {
   top: 0;
   right: 0;
   bottom: 0;
+  z-index: 0;
   width: min(48vw, 720px);
   background:
-    linear-gradient(90deg, rgba(247, 242, 234, 0), rgba(32, 35, 38, 0.18)),
-    url("./assets/hero-bridge-background.jpg") center / cover no-repeat;
+    radial-gradient(circle at 82% 16%, rgba(255, 255, 255, 0.78), transparent 28%),
+    linear-gradient(90deg, rgba(247, 242, 234, 0), rgba(32, 35, 38, 0.16));
   opacity: 0.46;
   filter: saturate(0.72) contrast(0.95);
   mask-image: linear-gradient(90deg, transparent, #000 24%);
@@ -3475,16 +3479,17 @@ html.js-ready [data-scroll-section].is-visible .part-five-reveal:nth-child(4) {
 
 .parts-page-truck .parts-hero::before {
   background:
+    linear-gradient(90deg, rgba(251, 248, 242, 0.94) 0%, rgba(247, 242, 234, 0.74) 44%, rgba(45, 49, 52, 0.1) 100%),
     linear-gradient(90deg, rgba(255, 90, 31, 0.22), transparent 18%),
     linear-gradient(rgba(32, 35, 38, 0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(32, 35, 38, 0.035) 1px, transparent 1px);
-  background-size: 100% 1px, 100% 42px, 42px 100%;
+  background-size: auto, 100% 1px, 100% 42px, 42px 100%;
   opacity: 0.86;
 }
 
 .parts-hero-grid {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   display: grid;
   gap: var(--space-7);
   align-items: center;
@@ -3531,104 +3536,31 @@ html.js-ready [data-scroll-section].is-visible .part-five-reveal:nth-child(4) {
   flex: none;
 }
 
-.parts-hero-media {
-  position: relative;
-  min-height: clamp(330px, 68vw, 540px);
-  overflow: hidden;
-  margin: 0;
-  border: 1px solid rgba(32, 35, 38, 0.12);
-  background: var(--color-metal-soft);
-  box-shadow: 0 28px 72px rgba(32, 35, 38, 0.17);
-  clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
-  isolation: isolate;
-}
-
-.parts-hero-media::before {
-  content: "";
+.parts-hero-vehicle {
   position: absolute;
-  top: 0;
-  left: 8%;
-  z-index: 2;
-  width: 22px;
-  height: 116px;
-  background: var(--color-accent);
-  transform: skewX(-22deg);
-}
-
-.parts-hero-media::after {
-  content: "";
-  position: absolute;
-  inset: 0;
   z-index: 1;
-  background:
-    linear-gradient(180deg, rgba(32, 35, 38, 0.04) 0%, rgba(32, 35, 38, 0.12) 48%, rgba(32, 35, 38, 0.62) 100%),
-    linear-gradient(90deg, rgba(32, 35, 38, 0.16), transparent 52%);
+  right: 0;
+  bottom: clamp(18px, 4vh, 40px);
+  width: 100vw;
+  max-width: none;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.34;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 22px 34px rgba(32, 35, 38, 0.16));
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 100%);
 }
 
-.parts-hero-media img {
-  width: 100%;
-  height: 100%;
-  min-height: inherit;
-  object-fit: cover;
-  transition: transform 680ms var(--ease-out);
+.parts-hero-vehicle-car {
+  bottom: clamp(24px, 5vh, 48px);
 }
 
-.parts-hero-media:hover img {
-  transform: scale(1.035);
-}
-
-.parts-hero-media figcaption {
-  position: absolute;
-  left: clamp(24px, 6vw, 54px);
-  right: clamp(24px, 5vw, 48px);
-  bottom: clamp(22px, 5vw, 44px);
-  z-index: 2;
-  display: grid;
-  gap: var(--space-2);
-  color: #fffaf4;
-}
-
-.parts-hero-media figcaption span {
-  color: rgba(255, 250, 244, 0.72);
-  font-family: var(--font-ui);
-  font-size: 0.82rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.parts-hero-media figcaption strong {
-  max-width: 12ch;
-  font-family: var(--font-display);
-  font-size: clamp(2.15rem, 8vw, 4.2rem);
-  font-style: italic;
-  font-weight: 800;
-  letter-spacing: 0;
-  line-height: 0.9;
-  text-transform: uppercase;
-}
-
-.parts-page-car .parts-hero-media {
-  border-color: rgba(255, 255, 255, 0.72);
-  box-shadow: 0 30px 86px rgba(32, 35, 38, 0.13);
-}
-
-.parts-page-car .parts-hero-media::after {
-  background:
-    linear-gradient(180deg, rgba(32, 35, 38, 0.01) 0%, rgba(32, 35, 38, 0.1) 46%, rgba(32, 35, 38, 0.54) 100%),
-    linear-gradient(90deg, rgba(32, 35, 38, 0.1), transparent 60%);
-}
-
-.parts-page-truck .parts-hero-media {
-  border-color: rgba(32, 35, 38, 0.22);
-  box-shadow: 0 32px 78px rgba(32, 35, 38, 0.23);
-  clip-path: polygon(8% 0, 100% 0, 93% 100%, 0 100%);
-}
-
-.parts-page-truck .parts-hero-media::after {
-  background:
-    linear-gradient(180deg, rgba(32, 35, 38, 0.08) 0%, rgba(32, 35, 38, 0.24) 44%, rgba(23, 25, 27, 0.74) 100%),
-    linear-gradient(90deg, rgba(32, 35, 38, 0.26), transparent 58%);
+.parts-hero-vehicle-truck {
+  bottom: clamp(20px, 4vh, 46px);
+  opacity: 0.38;
+  filter: drop-shadow(0 24px 38px rgba(32, 35, 38, 0.2));
 }
 
 .parts-section {
@@ -3856,6 +3788,21 @@ html.js-ready .parts-page .is-visible .parts-page-reveal:nth-child(2) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .parts-hero-vehicle {
+    right: 0;
+    bottom: clamp(28px, 5vh, 58px);
+    width: 100vw;
+    opacity: 0.48;
+  }
+
+  .parts-hero-vehicle-car {
+    bottom: clamp(30px, 5vh, 60px);
+  }
+
+  .parts-hero-vehicle-truck {
+    opacity: 0.52;
+  }
+
   .parts-finder-panel {
     grid-template-columns: minmax(0, 1fr) 190px;
     align-items: stretch;
@@ -3930,8 +3877,24 @@ html.js-ready .parts-page .is-visible .parts-page-reveal:nth-child(2) {
     font-size: clamp(6.2rem, 7.6vw, 8.4rem);
   }
 
-  .parts-hero-media {
-    min-height: 590px;
+  .parts-hero-vehicle {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 1;
+    filter: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .parts-hero-vehicle-car {
+    object-position: center 56%;
+  }
+
+  .parts-hero-vehicle-truck {
+    object-position: center 58%;
+    opacity: 1;
   }
 
   .parts-section {

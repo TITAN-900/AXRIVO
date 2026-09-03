@@ -6,6 +6,14 @@
   const vehicleType = pageType === "truck" ? "HEAVY TRUCK" : "CAR";
   const routeBase = pageType === "truck" ? "heavy-truck-parts" : "car-parts";
   const pageLabel = pageType === "truck" ? "Heavy Truck Parts" : "Car Parts";
+  const heroImagePath =
+    pageType === "truck"
+      ? "/images/pages/heavy-truck-parts/howo-heavy-truck-side-profile.png"
+      : "/images/pages/car-parts/proton-passenger-car-side-profile.png";
+  const heroImageAlt =
+    pageType === "truck"
+      ? "HOWO heavy truck side profile for AXRIVO heavy truck parts"
+      : "Proton passenger car side profile for AXRIVO car parts";
 
   if (!catalog || !ui || !pageType) {
     return;
@@ -46,6 +54,7 @@
     document.querySelector('meta[property="og:title"]')?.setAttribute("content", title);
     document.querySelector('meta[property="og:description"]')?.setAttribute("content", description);
     document.querySelector('meta[property="og:url"]')?.setAttribute("content", helpers?.absoluteUrl(`/${routeBase}/`) ?? `/${routeBase}/`);
+    document.querySelector('meta[property="og:image"]')?.setAttribute("content", helpers?.absoluteUrl(heroImagePath) ?? heroImagePath);
     document.querySelector('link[rel="canonical"]')?.setAttribute("href", helpers?.absoluteUrl(`/${routeBase}/`) ?? `/${routeBase}/`);
   };
 
@@ -64,7 +73,13 @@
           "@id": helpers?.absoluteUrl(`/${routeBase}/#collection`) ?? `/${routeBase}/#collection`,
           name: `${pageLabel} | AXRIVO`,
           url: helpers?.absoluteUrl(`/${routeBase}/`) ?? `/${routeBase}/`,
-          about: pageLabel
+          about: pageLabel,
+          image: helpers?.absoluteUrl(heroImagePath) ?? heroImagePath,
+          primaryImageOfPage: {
+            "@type": "ImageObject",
+            url: helpers?.absoluteUrl(heroImagePath) ?? heroImagePath,
+            caption: heroImageAlt
+          }
         },
         {
           "@type": "BreadcrumbList",
