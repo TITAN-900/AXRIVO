@@ -69,35 +69,35 @@
   const carBrandOrder = ["Toyota", "Honda", "Perodua", "Nissan", "Mitsubishi", "Mazda", "Proton", "Ford"];
   const carBrandVisuals = {
     toyota: {
-      image: "/images/pages/car-parts/categories/toyota-logo.webp",
+      image: "/images/pages/car-parts/categories/toyota-logo-transparent.webp",
       alt: "Toyota logo"
     },
     honda: {
-      image: "/images/pages/car-parts/categories/honda-logo.webp",
+      image: "/images/pages/car-parts/categories/honda-logo-transparent.webp",
       alt: "Honda logo"
     },
     perodua: {
-      image: "/images/pages/car-parts/categories/perodua-logo.webp",
+      image: "/images/pages/car-parts/categories/perodua-logo-transparent.webp",
       alt: "Perodua logo"
     },
     nissan: {
-      image: "/images/pages/car-parts/categories/nissan-logo.webp",
+      image: "/images/pages/car-parts/categories/nissan-logo-transparent.webp",
       alt: "Nissan logo"
     },
     mitsubishi: {
-      image: "/images/pages/car-parts/categories/mitsubishi-logo.webp",
+      image: "/images/pages/car-parts/categories/mitsubishi-logo-transparent.webp",
       alt: "Mitsubishi Motors logo"
     },
     mazda: {
-      image: "/images/pages/car-parts/categories/mazda-logo.webp",
+      image: "/images/pages/car-parts/categories/mazda-logo-transparent.webp",
       alt: "Mazda logo"
     },
     proton: {
-      image: "/images/pages/car-parts/categories/proton-logo.webp",
+      image: "/images/pages/car-parts/categories/proton-logo-transparent.webp",
       alt: "Proton logo"
     },
     ford: {
-      image: "/images/pages/car-parts/categories/ford-logo.webp",
+      image: "/images/pages/car-parts/categories/ford-logo-transparent.webp",
       alt: "Ford logo"
     }
   };
@@ -146,7 +146,7 @@
       <a class="parts-brand-item${visual ? ` has-brand-logo brand-logo-${brandSlug}` : ""}" href="${escapeHtml(localUrl(`/brands/${brandSlug}/`))}" aria-label="View AXRIVO parts for ${escapeHtml(brand)}">
         ${
           visual
-            ? `<img class="parts-brand-logo" src="${escapeHtml(localUrl(visual.image))}" alt="${escapeHtml(visual.alt)}" loading="lazy" decoding="async" />`
+            ? `<span class="parts-brand-logo-stage"><img class="parts-brand-logo" src="${escapeHtml(localUrl(visual.image))}" alt="${escapeHtml(visual.alt)}" loading="lazy" decoding="async" /></span>`
             : escapeHtml(brand)
         }
       </a>

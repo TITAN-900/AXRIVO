@@ -3764,37 +3764,55 @@ html.js-ready [data-scroll-section].is-visible .part-five-reveal:nth-child(4) {
 }
 
 .parts-page-car .parts-brand-item.has-brand-logo {
-  --brand-logo-width: 146px;
-  --brand-logo-height: 76px;
-  min-height: 108px;
-  padding: 14px 8px;
-  border-color: rgba(32, 35, 38, 0.045);
-  background:
-    linear-gradient(135deg, rgba(255, 250, 244, 0.2), rgba(247, 242, 234, 0.08)),
-    rgba(251, 248, 242, 0.08);
+  --brand-logo-width: 96px;
+  --brand-logo-height: 68px;
+  min-height: 102px;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  background: transparent;
   box-shadow: none;
+}
+
+.parts-page-car .parts-brand-item.has-brand-logo::after {
+  left: 50%;
+  right: auto;
+  bottom: 4px;
+  width: 76px;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+}
+
+.parts-page-car .parts-brand-item.has-brand-logo:hover {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+
+.parts-page-car .parts-brand-item.has-brand-logo:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+.parts-page-car .parts-brand-logo-stage {
+  display: flex;
+  width: min(140px, 100%);
+  height: 82px;
+  align-items: center;
+  justify-content: center;
 }
 
 .parts-page-car .parts-brand-item.has-brand-logo .parts-brand-logo {
   display: block;
-  width: min(100%, var(--brand-logo-width));
-  height: var(--brand-logo-height);
-  max-width: 100%;
-  max-height: 82px;
+  width: auto;
+  height: auto;
+  max-width: var(--brand-logo-width);
+  max-height: var(--brand-logo-height);
   object-fit: contain;
   object-position: center;
   transition:
     filter var(--transition),
     opacity var(--transition),
     transform var(--transition);
-}
-
-.parts-page-car .parts-brand-item.has-brand-logo:hover {
-  border-color: rgba(255, 90, 31, 0.22);
-  background:
-    linear-gradient(135deg, rgba(255, 250, 244, 0.32), rgba(247, 242, 234, 0.14)),
-    rgba(251, 248, 242, 0.14);
-  box-shadow: 0 14px 30px rgba(32, 35, 38, 0.03);
 }
 
 .parts-page-car .parts-brand-item.has-brand-logo:hover .parts-brand-logo {
@@ -3804,43 +3822,43 @@ html.js-ready [data-scroll-section].is-visible .part-five-reveal:nth-child(4) {
 }
 
 .parts-page-car .parts-brand-item.brand-logo-toyota {
-  --brand-logo-width: 142px;
-  --brand-logo-height: 78px;
+  --brand-logo-width: 92px;
+  --brand-logo-height: 68px;
 }
 
 .parts-page-car .parts-brand-item.brand-logo-honda {
-  --brand-logo-width: 136px;
-  --brand-logo-height: 78px;
+  --brand-logo-width: 92px;
+  --brand-logo-height: 68px;
 }
 
 .parts-page-car .parts-brand-item.brand-logo-perodua {
-  --brand-logo-width: 146px;
-  --brand-logo-height: 78px;
+  --brand-logo-width: 96px;
+  --brand-logo-height: 68px;
 }
 
 .parts-page-car .parts-brand-item.brand-logo-nissan {
-  --brand-logo-width: 128px;
-  --brand-logo-height: 78px;
+  --brand-logo-width: 88px;
+  --brand-logo-height: 68px;
 }
 
 .parts-page-car .parts-brand-item.brand-logo-mitsubishi {
-  --brand-logo-width: 104px;
-  --brand-logo-height: 78px;
+  --brand-logo-width: 78px;
+  --brand-logo-height: 68px;
 }
 
 .parts-page-car .parts-brand-item.brand-logo-mazda {
-  --brand-logo-width: 122px;
-  --brand-logo-height: 80px;
+  --brand-logo-width: 90px;
+  --brand-logo-height: 68px;
 }
 
 .parts-page-car .parts-brand-item.brand-logo-proton {
-  --brand-logo-width: 130px;
-  --brand-logo-height: 80px;
+  --brand-logo-width: 84px;
+  --brand-logo-height: 68px;
 }
 
 .parts-page-car .parts-brand-item.brand-logo-ford {
-  --brand-logo-width: 158px;
-  --brand-logo-height: 60px;
+  --brand-logo-width: 104px;
+  --brand-logo-height: 58px;
 }
 
 @media (max-width: 699px) {
@@ -3852,9 +3870,9 @@ html.js-ready [data-scroll-section].is-visible .part-five-reveal:nth-child(4) {
     min-height: 104px;
   }
 
-  .parts-page-car .parts-brand-item.has-brand-logo .parts-brand-logo {
-    max-width: min(100%, calc(var(--brand-logo-width) * 1.1));
-    max-height: 84px;
+  .parts-page-car .parts-brand-logo-stage {
+    width: 140px;
+    height: 82px;
   }
 }
 
