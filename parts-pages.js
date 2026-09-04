@@ -140,12 +140,13 @@
 
   const renderBrand = (brand) => {
     const visual = getBrandVisual(brand);
+    const brandSlug = catalog.slugify(brand);
 
     return `
-      <a class="parts-brand-item${visual ? " has-brand-logo" : ""}" href="${escapeHtml(localUrl(`/brands/${catalog.slugify(brand)}/`))}" aria-label="View AXRIVO parts for ${escapeHtml(brand)}">
+      <a class="parts-brand-item${visual ? ` has-brand-logo brand-logo-${brandSlug}` : ""}" href="${escapeHtml(localUrl(`/brands/${brandSlug}/`))}" aria-label="View AXRIVO parts for ${escapeHtml(brand)}">
         ${
           visual
-            ? `<img src="${escapeHtml(localUrl(visual.image))}" alt="${escapeHtml(visual.alt)}" loading="lazy" decoding="async" />`
+            ? `<img class="parts-brand-logo" src="${escapeHtml(localUrl(visual.image))}" alt="${escapeHtml(visual.alt)}" loading="lazy" decoding="async" />`
             : escapeHtml(brand)
         }
       </a>
