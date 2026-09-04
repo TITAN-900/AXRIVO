@@ -3763,6 +3763,39 @@ html.js-ready [data-scroll-section].is-visible .part-five-reveal:nth-child(4) {
   transform: scaleX(1);
 }
 
+.parts-page-car .parts-brand-item.has-brand-logo {
+  min-height: 96px;
+  padding: 16px 12px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.parts-page-car .parts-brand-item.has-brand-logo img {
+  display: block;
+  width: min(100%, 170px);
+  height: 66px;
+  object-fit: contain;
+  object-position: center;
+  transition:
+    opacity var(--transition),
+    transform var(--transition);
+}
+
+.parts-page-car .parts-brand-item.has-brand-logo:hover img {
+  opacity: 0.96;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 699px) {
+  .parts-page-car .parts-brand-list {
+    grid-template-columns: 1fr;
+  }
+
+  .parts-page-car .parts-brand-item.has-brand-logo img {
+    width: min(100%, 190px);
+    height: 72px;
+  }
+}
+
 .parts-page-truck .parts-brand-item {
   background: rgba(255, 250, 244, 0.48);
   clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);

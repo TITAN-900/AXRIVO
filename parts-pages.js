@@ -66,6 +66,60 @@
       isProductPhoto: Boolean(carVisual)
     };
   };
+  const carBrandOrder = ["Toyota", "Honda", "Perodua", "Nissan", "Mitsubishi", "Mazda", "Proton", "Ford"];
+  const carBrandVisuals = {
+    toyota: {
+      image: "/images/pages/car-parts/categories/toyota-logo.webp",
+      alt: "Toyota logo"
+    },
+    honda: {
+      image: "/images/pages/car-parts/categories/honda-logo.webp",
+      alt: "Honda logo"
+    },
+    perodua: {
+      image: "/images/pages/car-parts/categories/perodua-logo.webp",
+      alt: "Perodua logo"
+    },
+    nissan: {
+      image: "/images/pages/car-parts/categories/nissan-logo.webp",
+      alt: "Nissan logo"
+    },
+    mitsubishi: {
+      image: "/images/pages/car-parts/categories/mitsubishi-logo.webp",
+      alt: "Mitsubishi Motors logo"
+    },
+    mazda: {
+      image: "/images/pages/car-parts/categories/mazda-logo.webp",
+      alt: "Mazda logo"
+    },
+    proton: {
+      image: "/images/pages/car-parts/categories/proton-logo.webp",
+      alt: "Proton logo"
+    },
+    ford: {
+      image: "/images/pages/car-parts/categories/ford-logo.webp",
+      alt: "Ford logo"
+    }
+  };
+
+  const getBrandVisual = (brand) => (pageType === "car" ? carBrandVisuals[catalog.slugify(brand)] : null);
+
+  const getBrandsToRender = () => {
+    const brands = catalog.getVehicleBrands(vehicleType);
+
+    if (pageType !== "car") {
+      return brands;
+    }
+
+    const brandsBySlug = new Map(brands.map((brand) => [catalog.slugify(brand), brand]));
+    const orderedBrands = carBrandOrder
+      .map((brand) => brandsBySlug.get(catalog.slugify(brand)))
+      .filter(Boolean);
+    const orderedSlugs = new Set(orderedBrands.map((brand) => catalog.slugify(brand)));
+    const remainingBrands = brands.filter((brand) => !orderedSlugs.has(catalog.slugify(brand)));
+
+    return [...orderedBrands, ...remainingBrands];
+  };
 
   const renderCategoryCard = (category, index) => {
     const visual = getCategoryVisual(category);
@@ -84,11 +138,19 @@
     `;
   };
 
-  const renderBrand = (brand) => `
-    <a class="parts-brand-item" href="${escapeHtml(localUrl(`/brands/${catalog.slugify(brand)}/`))}" aria-label="View AXRIVO parts for ${escapeHtml(brand)}">
-      ${escapeHtml(brand)}
-    </a>
-  `;
+  const renderBrand = (brand) => {
+    const visual = getBrandVisual(brand);
+
+    return `
+      <a class="parts-brand-item${visual ? " has-brand-logo" : ""}" href="${escapeHtml(localUrl(`/brands/${catalog.slugify(brand)}/`))}" aria-label="View AXRIVO parts for ${escapeHtml(brand)}">
+        ${
+          visual
+            ? `<img src="${escapeHtml(localUrl(visual.image))}" alt="${escapeHtml(visual.alt)}" loading="lazy" decoding="async" />`
+            : escapeHtml(brand)
+        }
+      </a>
+    `;
+  };
 
   const setMeta = () => {
     const title = `${pageLabel} | AXRIVO`;
@@ -170,7 +232,7 @@
       return;
     }
 
-    brandList.innerHTML = catalog.getVehicleBrands(vehicleType).map(renderBrand).join("");
+    brandList.innerHTML = getBrandsToRender().map(renderBrand).join("");
   };
 
   const renderProducts = () => {
