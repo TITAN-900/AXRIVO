@@ -3674,6 +3674,36 @@ html.js-ready [data-scroll-section].is-visible .part-five-reveal:nth-child(4) {
   box-shadow: 0 18px 46px rgba(32, 35, 38, 0.09);
 }
 
+.parts-page-car .parts-category-card.has-product-photo {
+  background: #fff;
+}
+
+.parts-page-car .parts-category-card.has-product-photo img {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  inset: 0;
+  object-fit: contain;
+  object-position: center 32%;
+  min-height: 0;
+  padding: clamp(20px, 3.5vw, 42px) clamp(20px, 3.6vw, 40px) clamp(108px, 19%, 136px);
+  background: #fff;
+}
+
+.parts-page-car .parts-category-card.has-product-photo .category-shade {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0) 46%,
+    rgba(32, 35, 38, 0.24) 66%,
+    rgba(18, 21, 24, 0.86) 100%
+  );
+}
+
+.parts-page-car .parts-category-card.has-product-photo:hover .category-shade {
+  opacity: 0.92;
+}
+
 .parts-page-truck .parts-category-card {
   border-color: rgba(32, 35, 38, 0.16);
   border-radius: 6px;
@@ -3831,6 +3861,12 @@ html.js-ready .parts-page .is-visible .parts-page-reveal:nth-child(2) {
     min-height: 340px;
   }
 
+  .parts-page-car .parts-category-card.has-product-photo img {
+    object-fit: contain;
+    object-position: center 32%;
+    padding: clamp(22px, 4vw, 38px) clamp(22px, 4vw, 38px) 122px;
+  }
+
   .parts-brand-list {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
@@ -3931,6 +3967,12 @@ html.js-ready .parts-page .is-visible .parts-page-reveal:nth-child(2) {
 
   .parts-category-card {
     min-height: 358px;
+  }
+
+  .parts-page-car .parts-category-card.has-product-photo img {
+    object-fit: contain;
+    object-position: center 32%;
+    padding: clamp(24px, 3.4vw, 42px) clamp(24px, 3.4vw, 42px) clamp(112px, 19%, 138px);
   }
 
   .parts-page-car .parts-category-card:nth-child(1),

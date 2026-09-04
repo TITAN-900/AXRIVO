@@ -22,19 +22,67 @@
   const escapeHtml = ui.escapeHtml;
   const localUrl = ui.localUrl;
   const categoryCodePrefix = pageType === "truck" ? "TRUCK" : "CAR";
+  const carCategoryVisuals = {
+    "engine-parts": {
+      image: "/images/pages/car-parts/categories/car-engine-parts.webp",
+      alt: "Passenger car engine assembly on white background"
+    },
+    "brake-system": {
+      image: "/images/pages/car-parts/categories/car-brake-system.webp",
+      alt: "Brake disc, caliper and brake pads on white background"
+    },
+    suspension: {
+      image: "/images/pages/car-parts/categories/car-suspension-parts.webp",
+      alt: "Shock absorber strut and control arm on white background"
+    },
+    steering: {
+      image: "/images/pages/car-parts/categories/car-steering-parts.webp",
+      alt: "Steering rack assembly on white background"
+    },
+    electrical: {
+      image: "/images/pages/car-parts/categories/car-electrical-parts.webp",
+      alt: "Car battery, alternator and starter motor on white background"
+    },
+    cooling: {
+      image: "/images/pages/car-parts/categories/car-cooling-system.webp",
+      alt: "Radiator, cooling fan and water pump on white background"
+    },
+    transmission: {
+      image: "/images/pages/car-parts/categories/car-transmission-parts.webp",
+      alt: "Passenger car transmission gearbox on white background"
+    },
+    "body-parts": {
+      image: "/images/pages/car-parts/categories/car-body-parts.webp",
+      alt: "Car hood, fender and headlight on white background"
+    }
+  };
 
-  const renderCategoryCard = (category, index) => `
-    <a class="category-card parts-category-card" href="${escapeHtml(localUrl(`/${routeBase}/${category.slug}/`))}" aria-label="Explore ${escapeHtml(category.name)}">
-      <img src="${escapeHtml(localUrl(category.image))}" alt="${escapeHtml(category.name)} placeholder" loading="lazy" decoding="async" />
-      <span class="category-shade" aria-hidden="true"></span>
-      <span class="category-content">
-        <span class="category-code">${categoryCodePrefix} / ${String(index + 1).padStart(2, "0")}</span>
-        <strong>${escapeHtml(category.name.toUpperCase())}</strong>
-        <span class="category-link">Explore <span aria-hidden="true">→</span></span>
-      </span>
-      <span class="category-accent" aria-hidden="true"></span>
-    </a>
-  `;
+  const getCategoryVisual = (category) => {
+    const carVisual = pageType === "car" ? carCategoryVisuals[category.slug] : null;
+
+    return {
+      image: carVisual?.image ?? category.image,
+      alt: carVisual?.alt ?? `${category.name} placeholder`,
+      isProductPhoto: Boolean(carVisual)
+    };
+  };
+
+  const renderCategoryCard = (category, index) => {
+    const visual = getCategoryVisual(category);
+
+    return `
+      <a class="category-card parts-category-card${visual.isProductPhoto ? " has-product-photo" : ""}" href="${escapeHtml(localUrl(`/${routeBase}/${category.slug}/`))}" aria-label="Explore ${escapeHtml(category.name)}">
+        <img src="${escapeHtml(localUrl(visual.image))}" alt="${escapeHtml(visual.alt)}" loading="lazy" decoding="async" />
+        <span class="category-shade" aria-hidden="true"></span>
+        <span class="category-content">
+          <span class="category-code">${categoryCodePrefix} / ${String(index + 1).padStart(2, "0")}</span>
+          <strong>${escapeHtml(category.name.toUpperCase())}</strong>
+          <span class="category-link">Explore <span aria-hidden="true">→</span></span>
+        </span>
+        <span class="category-accent" aria-hidden="true"></span>
+      </a>
+    `;
+  };
 
   const renderBrand = (brand) => `
     <a class="parts-brand-item" href="${escapeHtml(localUrl(`/brands/${catalog.slugify(brand)}/`))}" aria-label="View AXRIVO parts for ${escapeHtml(brand)}">
