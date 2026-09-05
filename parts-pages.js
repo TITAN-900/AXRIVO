@@ -22,6 +22,18 @@
   const escapeHtml = ui.escapeHtml;
   const localUrl = ui.localUrl;
   const categoryCodePrefix = pageType === "truck" ? "TRUCK" : "CAR";
+  // Page-only covers keep product galleries and other catalog views unchanged.
+  const truckFeaturedVisuals = {
+    "air-brake-drum-assembly": "Heavy truck air brake drum assembly on white background",
+    "e13c-turbocharger-assembly": "E13C turbocharger assembly with actuator on white background",
+    "transmission-gear-service-kit": "Heavy truck gearbox with gears, bearings and service parts on white background",
+    "wd615-turbocharger-assembly": "WD615 heavy-duty turbocharger assembly on white background",
+    "common-rail-fuel-pump-unit": "Common rail diesel fuel pump unit on white background",
+    "differential-seal-repair-set": "Differential bearings, seals and repair components on white background",
+    "heavy-duty-clutch-assembly": "Heavy-duty clutch disc and pressure plate on white background",
+    "high-capacity-radiator-core": "Heavy truck radiator core on white background"
+  };
+
   const carCategoryVisuals = {
     "engine-parts": {
       image: "/images/pages/car-parts/categories/car-engine-parts.webp",
@@ -246,15 +258,24 @@
     const products = catalog.sortProducts(catalog.getProductsByVehicleType(vehicleType), "newest").slice(0, 8);
 
     productGrid.innerHTML = products
-      .map((product) =>
-        ui.renderProductCard(product, {
-          className: "parts-product-card",
+      .map((product) => {
+        const imageAlt = pageType === "truck" ? truckFeaturedVisuals[product.slug] : null;
+        const cardProduct = imageAlt
+          ? {
+              ...product,
+              mainImage: `/images/pages/heavy-truck-parts/featured/${product.slug}.webp`,
+              imageAlt
+            }
+          : product;
+
+        return ui.renderProductCard(cardProduct, {
+          className: `parts-product-card${imageAlt ? ` has-featured-photo featured-photo-${product.slug}` : ""}`,
           secondaryMeta:
             vehicleType === "HEAVY TRUCK"
               ? `Truck Model: ${(product.vehicleModels ?? []).join(" / ")} | Engine: ${(product.engineModels ?? []).join(" / ")}`
               : `Vehicle Application: ${(product.vehicleBrands ?? []).join(" / ")} ${(product.vehicleModels ?? []).join(" / ")}`
-        })
-      )
+        });
+      })
       .join("");
   };
 

@@ -3899,6 +3899,25 @@ html.js-ready [data-scroll-section].is-visible .part-five-reveal:nth-child(4) {
   background: rgba(255, 250, 244, 0.72);
 }
 
+.parts-page-truck .has-featured-photo .product-media {
+  background: #fff;
+}
+
+.parts-page-truck .has-featured-photo .product-media img {
+  object-fit: contain;
+  object-position: center;
+  padding: var(--featured-image-padding, 6%);
+}
+
+.parts-page-truck .featured-photo-air-brake-drum-assembly {
+  --featured-image-padding: 7%;
+}
+
+.parts-page-truck .featured-photo-transmission-gear-service-kit,
+.parts-page-truck .featured-photo-differential-seal-repair-set {
+  --featured-image-padding: 4%;
+}
+
 html.js-ready .parts-page .parts-page-reveal {
   opacity: 0;
   transform: translateY(24px);
