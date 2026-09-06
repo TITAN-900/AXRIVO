@@ -133,7 +133,19 @@
     }
   };
 
-  const getBrandVisual = (brand) => (pageType === "car" ? carBrandVisuals[catalog.slugify(brand)] : null);
+  const truckBrandVisuals = {
+    hino: { image: "/images/pages/heavy-truck-parts/brands/hino-logo.webp", alt: "Hino logo" },
+    isuzu: { image: "/images/pages/heavy-truck-parts/brands/isuzu-logo.webp", alt: "Isuzu logo" },
+    howo: { image: "/images/pages/heavy-truck-parts/brands/howo-logo.webp", alt: "HOWO logo" },
+    fuso: { image: "/images/pages/heavy-truck-parts/brands/fuso-logo.webp", alt: "Fuso logo" },
+    ud: { image: "/images/pages/heavy-truck-parts/brands/ud-trucks-logo.webp", alt: "UD Trucks logo" },
+    volvo: { image: "/images/pages/heavy-truck-parts/brands/volvo-logo.webp", alt: "Volvo logo" },
+    scania: { image: "/images/pages/heavy-truck-parts/brands/scania-logo.webp", alt: "Scania logo" },
+    man: { image: "/images/pages/heavy-truck-parts/brands/man-logo.webp", alt: "MAN logo" }
+  };
+
+  const getBrandVisual = (brand) =>
+    (pageType === "car" ? carBrandVisuals : truckBrandVisuals)[catalog.slugify(brand)];
 
   const getBrandsToRender = () => {
     const brands = catalog.getVehicleBrands(vehicleType);
