@@ -3711,6 +3711,30 @@ html.js-ready [data-scroll-section].is-visible .part-five-reveal:nth-child(4) {
   clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
 }
 
+.parts-page-truck .parts-category-card.has-product-photo {
+  background: #fff;
+}
+
+.parts-page-truck .parts-category-card.has-product-photo img {
+  /* Preserve the previous artwork's layout footprint while containing the photo. */
+  height: auto;
+  aspect-ratio: 8 / 5;
+  object-fit: contain;
+  object-position: center;
+  padding: 20px clamp(20px, 3vw, 36px) 122px;
+  background: #fff;
+}
+
+.parts-page-truck .parts-category-card.has-product-photo:nth-child(10) img {
+  aspect-ratio: 7 / 5;
+}
+
+.parts-page-truck .parts-category-card.has-product-photo .category-shade {
+  top: auto;
+  height: 156px;
+  background: linear-gradient(180deg, transparent 0, rgba(32, 35, 38, 0.7) 40%, rgba(18, 21, 24, 0.94) 100%);
+}
+
 .parts-brand-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

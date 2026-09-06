@@ -69,13 +69,32 @@
     }
   };
 
+  const truckCategoryVisuals = {
+    "engine-parts": { file: "truck-engine-parts.webp", alt: "Heavy truck engine assembly on white background" },
+    "brake-system": { file: "truck-brake-system.webp", alt: "Heavy truck brake discs and brake components on white background" },
+    suspension: { file: "truck-suspension.webp", alt: "Heavy truck leaf spring and shock absorbers on white background" },
+    steering: { file: "truck-steering.webp", alt: "Heavy truck steering gear and linkage on white background" },
+    electrical: { file: "truck-electrical.webp", alt: "Heavy truck alternator, starter, ECU and wiring on white background" },
+    cooling: { file: "truck-cooling.webp", alt: "Heavy truck radiator on white background" },
+    transmission: { file: "truck-transmission.webp", alt: "Heavy truck transmission gearbox on white background" },
+    "body-parts": { file: "truck-body-parts-howo.webp", alt: "HOWO heavy truck front body parts" },
+    clutch: { file: "truck-clutch.webp", alt: "Heavy-duty clutch disc and pressure plate on white background" },
+    differential: { file: "truck-differential.webp", alt: "Heavy truck differential assembly on white background" }
+  };
+
   const getCategoryVisual = (category) => {
-    const carVisual = pageType === "car" ? carCategoryVisuals[category.slug] : null;
+    const truckVisual = truckCategoryVisuals[category.slug];
+    const visual = pageType === "car"
+      ? carCategoryVisuals[category.slug]
+      : truckVisual && {
+          image: `/images/pages/heavy-truck-parts/categories/${truckVisual.file}`,
+          alt: truckVisual.alt
+        };
 
     return {
-      image: carVisual?.image ?? category.image,
-      alt: carVisual?.alt ?? `${category.name} placeholder`,
-      isProductPhoto: Boolean(carVisual)
+      image: visual?.image ?? category.image,
+      alt: visual?.alt ?? `${category.name} placeholder`,
+      isProductPhoto: Boolean(visual)
     };
   };
   const carBrandOrder = ["Toyota", "Honda", "Perodua", "Nissan", "Mitsubishi", "Mazda", "Proton", "Ford"];
