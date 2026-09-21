@@ -185,8 +185,7 @@ const createUrlSet = (siteConfig, catalog, lastmod, siteUrlOption) => {
 
   [
     ["/", "1.0"],
-    ["/car-parts/", "0.9"],
-    ["/heavy-truck-parts/", "0.9"],
+    ["/products/", "0.9"],
     ["/brands/", "0.8"],
     ["/about/", "0.7"],
     ["/contact/", "0.7"],
@@ -195,14 +194,6 @@ const createUrlSet = (siteConfig, catalog, lastmod, siteUrlOption) => {
     ["/terms/", "0.3"],
     ["/cookies/", "0.3"]
   ].forEach(([routePath, priority]) => addEntry(routePath, priority));
-
-  orderedCategories("CAR").forEach((category) => {
-    addEntry(`/car-parts/${category.slug}/`, "0.8");
-  });
-
-  orderedCategories("HEAVY TRUCK").forEach((category) => {
-    addEntry(`/heavy-truck-parts/${category.slug}/`, "0.8");
-  });
 
   orderedBrands().forEach((brand) => {
     const slug = catalog.slugify(brand);

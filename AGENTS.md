@@ -2,7 +2,7 @@
 
 These instructions are permanent for AXRIVO work in this project.
 
-When the user asks to add products, import product images, add items to Car Parts, add items to Heavy Truck Parts, or "put these products on the website", default to the full Product Import SEO + GEO workflow unless the user explicitly says "do not do SEO/GEO".
+When the user asks to add products, import product images, add items to Products, or "put these products on the website", default to the full Product Import SEO + GEO workflow unless the user explicitly says "do not do SEO/GEO".
 
 ## Deployment Workflow
 
@@ -84,7 +84,7 @@ Alt text must be accurate and natural, such as `HINO E13C water pump OEM 16100-X
 
 Each product needs a stable, readable URL / slug, such as:
 
-`/heavy-truck-parts/product/hino-e13c-water-pump-16100-xxxx/`
+`/products/product/hino-e13c-water-pump-16100-xxxx/`
 
 Do not use query-string product URLs such as `product?id=2387`. If a product already has a URL, do not change the slug for small edits.
 
@@ -229,6 +229,7 @@ Important files:
 
 - `product-data.js`: centralized product, category, brand, search and import-standard data
 - `product-detail.js`: shared Product Detail Page template
+- `products-page.js`: unified Products catalog and filtering UI
 - `search-page.js`: internal product search UI
 - `category-page.js`: category result pages
 - `brand-page.js`: brand pages

@@ -21,6 +21,7 @@ const deployItems = [
   "category-page.js",
   "brand-page.js",
   "search-page.js",
+  "products-page.js",
   "info-pages.js",
   "product-detail.js",
   "assets",
@@ -32,6 +33,7 @@ const deployItems = [
   "contact",
   "cookies",
   "privacy",
+  "products",
   "request-part",
   "search",
   "terms"
@@ -101,6 +103,43 @@ const copyRecursive = (source, target) => {
 
   fs.mkdirSync(path.dirname(target), { recursive: true });
   fs.copyFileSync(source, target);
+};
+
+const generateUnifiedProductPages = () => {
+  const targetRoot = path.join(distRoot, "products", "product");
+
+  ["car-parts", "heavy-truck-parts"].forEach((routeBase) => {
+    const sourceRoot = path.join(distRoot, routeBase, "product");
+
+    if (!fs.existsSync(sourceRoot)) {
+      return;
+    }
+
+    fs.readdirSync(sourceRoot, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .forEach((entry) => {
+        const source = path.join(sourceRoot, entry.name);
+        const target = path.join(targetRoot, entry.name);
+        copyRecursive(source, target);
+
+        const htmlPath = path.join(target, "index.html");
+        if (fs.existsSync(htmlPath)) {
+          const html = fs
+            .readFileSync(htmlPath, "utf8")
+            .replaceAll(`/${routeBase}/product/${entry.name}/`, `/products/product/${entry.name}/`)
+            .replace(
+              /\s*<a href="[^"]+">CAR PARTS<\/a>\s*<a href="[^"]+">HEAVY TRUCK PARTS<\/a>/g,
+              '\n          <a href="../../../products/index.html">PRODUCTS</a>'
+            )
+            .replace(
+              /\s*<a href="[^"]+">Car Parts<\/a>\s*<a href="[^"]+">Heavy Truck Parts<\/a>/g,
+              '\n              <a href="../../../products/index.html">Products</a>'
+            )
+            .replace(/href="[^"]*engine-parts\/index\.html">Categories/g, 'href="../../../products/index.html#categories">Categories');
+          fs.writeFileSync(htmlPath, html, "utf8");
+        }
+      });
+  });
 };
 
 const listFiles = (root) =>
@@ -186,6 +225,8 @@ const main = () => {
       copyRecursive(source, path.join(distRoot, item));
     }
   });
+
+  generateUnifiedProductPages();
 
   listFiles(distRoot).forEach((filePath) => transformTextFile(filePath, siteUrl));
 

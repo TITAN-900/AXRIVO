@@ -868,11 +868,28 @@
 
   const unique = (items) => [...new Set(compact(items).map((item) => String(item).trim()))];
 
+  const productVehicleTypes = (product) => {
+    const values = [product.vehicleType, ...(product.vehicleTypes ?? [])]
+      .filter(Boolean)
+      .map((value) => String(value).toUpperCase());
+    const combined = values.join(" ");
+    const supportsBoth =
+      combined.includes("BOTH") ||
+      combined.includes("UNIVERSAL") ||
+      ((combined.includes("CAR") || combined.includes("PASSENGER")) &&
+        (combined.includes("TRUCK") || combined.includes("LORRY")));
+
+    return compact([
+      supportsBoth || combined.includes("CAR") || combined.includes("PASSENGER") ? "CAR" : "",
+      supportsBoth || combined.includes("TRUCK") || combined.includes("LORRY") ? "HEAVY TRUCK" : ""
+    ]);
+  };
+
   const categoryBySlug = (slug) => categories.find((category) => category.slug === slug);
 
   const categoryName = (slug) => categoryBySlug(slug)?.name ?? slug;
 
-  const productUrl = (product) => `/${product.vehicleType === "HEAVY TRUCK" ? "heavy-truck-parts" : "car-parts"}/product/${product.slug}/`;
+  const productUrl = (product) => `/products/product/${product.slug}/`;
 
   const firstOemNumber = (product) => product.oemNumbers?.[0] ?? product.oemNumber ?? product.oem ?? "";
 
@@ -994,7 +1011,7 @@
     const engineModel = filters.engineModel;
     const year = filters.year;
 
-    if (type && product.vehicleType !== type) return false;
+    if (type && !productVehicleTypes(product).includes(type)) return false;
     if (category && product.category !== category) return false;
     if (brand && slugify(product.brand) !== slugify(brand)) return false;
     if (vehicleBrand && !(product.vehicleBrands ?? [product.vehicleBrand]).some((item) => slugify(item) === slugify(vehicleBrand))) {
@@ -1047,7 +1064,7 @@
     return typeof limit === "number" ? sorted.slice(0, limit) : sorted;
   };
 
-  const getProductsByVehicleType = (vehicleType) => products.filter((product) => product.vehicleType === vehicleType);
+  const getProductsByVehicleType = (vehicleType) => products.filter((product) => productVehicleTypes(product).includes(vehicleType));
 
   const getCategoriesForVehicleType = (vehicleType) =>
     categories.filter((category) => category.vehicleTypes.includes(vehicleType));
@@ -1064,7 +1081,7 @@
     unique(
       [
         ...products
-          .filter((product) => !vehicleType || product.vehicleType === vehicleType)
+          .filter((product) => !vehicleType || productVehicleTypes(product).includes(vehicleType))
           .flatMap((product) => product.vehicleBrands ?? [product.vehicleBrand]),
         ...(vehicleType ? popularBrands[vehicleType] ?? [] : Object.values(popularBrands).flat())
       ]
@@ -1139,7 +1156,7 @@
   });
 
   const getFilterOptions = (items = products) => ({
-    vehicleTypes: unique(items.map((product) => product.vehicleType)),
+    vehicleTypes: unique(items.flatMap((product) => productVehicleTypes(product))),
     categories: unique(items.map((product) => product.category)),
     brands: unique(items.map((product) => product.brand)),
     vehicleBrands: unique(items.flatMap((product) => product.vehicleBrands ?? [product.vehicleBrand])),
@@ -1162,8 +1179,12 @@
   };
 
   const getProductByRoute = (routeBase, slug) => {
+    if (routeBase === "products") {
+      return products.find((product) => product.slug === slug) ?? null;
+    }
+
     const vehicleType = routeBase === "heavy-truck-parts" ? "HEAVY TRUCK" : "CAR";
-    return products.find((product) => product.vehicleType === vehicleType && product.slug === slug) ?? null;
+    return products.find((product) => productVehicleTypes(product).includes(vehicleType) && product.slug === slug) ?? null;
   };
 
   const getProductById = (id) => products.find((product) => product.id === id) ?? null;
@@ -1183,7 +1204,7 @@
       slug: brandSlug,
       name: label,
       products: brandProducts,
-      vehicleTypes: unique(brandProducts.map((product) => product.vehicleType)),
+      vehicleTypes: unique(brandProducts.flatMap((product) => productVehicleTypes(product))),
       categories: unique(brandProducts.map((product) => product.category)),
       vehicleModels: unique(brandProducts.flatMap((product) => product.vehicleModels))
     };
@@ -1201,6 +1222,7 @@
     categoryBySlug,
     categoryName,
     compact,
+    getCategories: () => [...categories],
     getBrandProducts,
     getBrandSummary,
     getCategoriesForVehicleType,
@@ -1223,6 +1245,7 @@
     productImageAlt,
     productSearchText,
     productUrl,
+    productVehicleTypes,
     searchProducts,
     slugify,
     sortProducts,

@@ -52,7 +52,20 @@ const routeToFile = (root, pathname) => {
     candidates.push(path.join(direct, "index.html"));
   }
 
-  return candidates.find((candidate) => isInside(root, candidate) && fs.existsSync(candidate) && fs.statSync(candidate).isFile());
+  const directMatch = candidates.find((candidate) => isInside(root, candidate) && fs.existsSync(candidate) && fs.statSync(candidate).isFile());
+
+  if (directMatch) {
+    return directMatch;
+  }
+
+  const productMatch = routePath.match(/^\/products\/product\/([^/]+)\/?$/);
+  if (productMatch) {
+    return ["car-parts", "heavy-truck-parts"]
+      .map((routeBase) => path.join(root, routeBase, "product", productMatch[1], "index.html"))
+      .find((candidate) => isInside(root, candidate) && fs.existsSync(candidate) && fs.statSync(candidate).isFile());
+  }
+
+  return undefined;
 };
 
 const serve = (root, port) => {

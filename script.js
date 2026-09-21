@@ -120,13 +120,62 @@ const buildSearchUrl = (params) => {
   return localUrl(`/search/${queryString ? `?${queryString}` : ""}`);
 };
 
+const getVehicleApplications = (product) => {
+  const values = [product.vehicleType, ...(product.vehicleTypes ?? [])]
+    .filter(Boolean)
+    .map((value) => String(value).toUpperCase());
+  const combined = values.join(" ");
+  const supportsBoth =
+    combined.includes("BOTH") ||
+    combined.includes("UNIVERSAL") ||
+    ((combined.includes("CAR") || combined.includes("PASSENGER")) &&
+      (combined.includes("TRUCK") || combined.includes("LORRY")));
+
+  return {
+    car: supportsBoth || combined.includes("CAR") || combined.includes("PASSENGER"),
+    truck: supportsBoth || combined.includes("TRUCK") || combined.includes("LORRY")
+  };
+};
+
+const renderVehicleApplication = (product) => {
+  const applications = getVehicleApplications(product);
+
+  if (!applications.car && !applications.truck) {
+    return "";
+  }
+
+  const label = applications.car && applications.truck ? "Car & Truck" : applications.truck ? "Truck" : "Car";
+  const carIcon = `
+    <svg class="vehicle-application-icon vehicle-application-icon-car" viewBox="0 0 32 18" aria-hidden="true">
+      <path d="M3 12.5h2.2l2.2-5.1c.4-.9 1.2-1.5 2.2-1.5h10.3c1 0 1.8.4 2.4 1.2l3.8 5.4H29v2H3z"></path>
+      <path d="M9.2 5.9 12 2.9h6.3l2.8 3"></path>
+      <circle cx="8.3" cy="14.5" r="2.1"></circle>
+      <circle cx="24.6" cy="14.5" r="2.1"></circle>
+    </svg>`;
+  const truckIcon = `
+    <svg class="vehicle-application-icon vehicle-application-icon-truck" viewBox="0 0 36 18" aria-hidden="true">
+      <path d="M2.5 3.5h20v10h-20z"></path>
+      <path d="M22.5 7h6l4.5 4.5v2h-10.5z"></path>
+      <path d="M28.5 7v4.5H33"></path>
+      <circle cx="8" cy="14.5" r="2.1"></circle>
+      <circle cx="26.8" cy="14.5" r="2.1"></circle>
+    </svg>`;
+
+  return `
+    <span class="vehicle-application" role="img" aria-label="${escapeHtml(label)}" title="${escapeHtml(label)}" data-tooltip="${escapeHtml(label)}">
+      ${applications.car ? carIcon : ""}
+      ${applications.truck ? truckIcon : ""}
+    </span>`;
+};
+
 const renderProductCard = (product, options = {}) => {
   const categoryName = catalog?.categoryName(product.category) ?? product.category;
   const href = localUrl(options.href ?? catalog?.productUrl(product) ?? product.href ?? "#");
   const image = localUrl(product.mainImage ?? product.image ?? "/assets/categories/body-others.svg");
   const imageAlt = product.imageAlt ?? `${product.name} product placeholder`;
   const oemText = product.oemNumbers?.length ? product.oemNumbers.join(" / ") : product.oemNumber ?? product.oem ?? "";
-  const vehicleText = product.vehicleType === "HEAVY TRUCK" ? "TRUCK" : "CAR";
+  const applications = getVehicleApplications(product);
+  const vehicleLabel = applications.car && applications.truck ? "Car and truck" : applications.truck ? "Truck" : "Passenger car";
   const secondaryMeta =
     options.secondaryMeta ??
     (product.vehicleType === "HEAVY TRUCK"
@@ -134,10 +183,10 @@ const renderProductCard = (product, options = {}) => {
       : `Application: ${product.vehicleBrand ?? ""} ${(product.vehicleModels ?? []).join(" / ")}`.trim());
 
   return `
-    <a class="product-card${options.className ? ` ${escapeHtml(options.className)}` : ""}" href="${escapeHtml(href)}" aria-label="View details for ${escapeHtml(product.name)}">
+    <a class="product-card${options.className ? ` ${escapeHtml(options.className)}` : ""}" href="${escapeHtml(href)}" aria-label="View details for ${escapeHtml(product.name)}, ${escapeHtml(vehicleLabel)} application">
       <span class="product-media">
         <img src="${escapeHtml(image)}" alt="${escapeHtml(imageAlt)}" loading="lazy" decoding="async" />
-        <span class="product-type">${escapeHtml(vehicleText)}</span>
+        ${renderVehicleApplication(product)}
       </span>
       <span class="product-info">
         <h3>${escapeHtml(product.name)}</h3>
@@ -150,6 +199,53 @@ const renderProductCard = (product, options = {}) => {
       </span>
     </a>
   `;
+};
+
+const normalizeUnifiedProductNavigation = () => {
+  const routeForLink = (link) => configHelpers?.sitePathFromUrl(link.href) ?? "";
+
+  document.querySelectorAll(".desktop-nav, .mobile-nav").forEach((nav) => {
+    const links = [...nav.querySelectorAll("a")];
+    const carLink = links.find((link) => routeForLink(link) === "/car-parts/");
+    const truckLink = links.find((link) => routeForLink(link) === "/heavy-truck-parts/");
+    const productsLink = carLink ?? truckLink;
+
+    if (productsLink) {
+      productsLink.href = localUrl("/products/");
+      productsLink.textContent = "PRODUCTS";
+    }
+
+    if (truckLink && truckLink !== productsLink) {
+      truckLink.remove();
+    }
+  });
+
+  document.querySelectorAll(".footer-column").forEach((column) => {
+    if (column.querySelector("h2")?.textContent.trim().toUpperCase() !== "SHOP") {
+      return;
+    }
+
+    const links = [...column.querySelectorAll("a")];
+    const carLink = links.find((link) => routeForLink(link) === "/car-parts/");
+    const truckLink = links.find((link) => routeForLink(link) === "/heavy-truck-parts/");
+    const productsLink = carLink ?? truckLink;
+
+    if (productsLink) {
+      productsLink.href = localUrl("/products/");
+      productsLink.textContent = "Products";
+    }
+
+    if (truckLink && truckLink !== productsLink) {
+      truckLink.remove();
+    }
+
+    links
+      .filter((link) => routeForLink(link).startsWith("/car-parts/") || routeForLink(link).startsWith("/heavy-truck-parts/"))
+      .forEach((link) => {
+        link.href = localUrl("/products/#categories");
+        link.textContent = "Categories";
+      });
+  });
 };
 
 const renderSelectOptions = (items, selected, placeholder) => `
@@ -677,9 +773,11 @@ window.AXRIVO_UI = {
   escapeHtml,
   localUrl,
   renderProductCard,
+  renderVehicleApplication,
   setupVehicleFinder
 };
 
+normalizeUnifiedProductNavigation();
 renderSiteConfigFields();
 renderProducts();
 renderBrands();

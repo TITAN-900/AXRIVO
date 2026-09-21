@@ -1,6 +1,6 @@
 # AXRIVO Website
 
-Official static website project for AXRIVO Automotive & Heavy Vehicle Parts.
+Official static website project for the unified AXRIVO automotive and heavy vehicle parts catalog.
 
 This folder is the GitHub/Vercel project root. Open this folder directly in VS Code.
 
@@ -13,14 +13,12 @@ npm run dev
 The local server uses normal HTTP routes such as:
 
 - `/`
-- `/car-parts/`
-- `/heavy-truck-parts/`
+- `/products/`
 - `/brands/`
 - `/about/`
 - `/contact/`
 - `/search/`
-- `/car-parts/product/{product-slug}/`
-- `/heavy-truck-parts/product/{product-slug}/`
+- `/products/product/{product-slug}/`
 
 Direct `file://` opening is no longer the primary workflow.
 

@@ -5,6 +5,38 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/car-parts/product/:slug",
+      "destination": "/products/product/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/heavy-truck-parts/product/:slug",
+      "destination": "/products/product/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/car-parts/:category",
+      "destination": "/products?category=:category",
+      "permanent": true
+    },
+    {
+      "source": "/heavy-truck-parts/:category",
+      "destination": "/products?category=:category",
+      "permanent": true
+    },
+    {
+      "source": "/car-parts",
+      "destination": "/products",
+      "permanent": true
+    },
+    {
+      "source": "/heavy-truck-parts",
+      "destination": "/products",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",

@@ -15,8 +15,9 @@
   const [routeBase, productSegment, slug] = routeParts;
   const product = productSegment === "product" ? catalog.getProductByRoute(routeBase, slug) : null;
 
-  const routeLabel = (item) => (item.vehicleType === "HEAVY TRUCK" ? "Heavy Truck Parts" : "Car Parts");
-  const routeHref = (item) => (item.vehicleType === "HEAVY TRUCK" ? "/heavy-truck-parts/" : "/car-parts/");
+  const routeLabel = () => "Products";
+  const routeHref = () => "/products/";
+  const categoryHref = (item) => `/products/?category=${encodeURIComponent(item.category)}`;
   const oemText = (item) => (item.oemNumbers?.length ? item.oemNumbers.join(" / ") : "");
   const applicationText = (item) => catalog.compact([...(item.vehicleBrands ?? []), ...(item.vehicleModels ?? [])]).join(" / ");
 
@@ -96,7 +97,7 @@
                 "@type": "ListItem",
                 position: 3,
                 name: category,
-                item: helpers?.absoluteUrl(`${routeHref(item)}${item.category}/`) ?? `${routeHref(item)}${item.category}/`
+                item: helpers?.absoluteUrl(categoryHref(item)) ?? categoryHref(item)
               },
               { "@type": "ListItem", position: 4, name: item.name, item: canonical }
             ]
@@ -127,7 +128,7 @@
       <span aria-hidden="true">/</span>
       <a href="${escapeHtml(localUrl(routeHref(item)))}">${escapeHtml(routeLabel(item))}</a>
       <span aria-hidden="true">/</span>
-      <a href="${escapeHtml(localUrl(`${routeHref(item)}${item.category}/`))}">${escapeHtml(catalog.categoryName(item.category))}</a>
+      <a href="${escapeHtml(localUrl(categoryHref(item)))}">${escapeHtml(catalog.categoryName(item.category))}</a>
       <span aria-hidden="true">/</span>
       <span>${escapeHtml(item.name)}</span>
     </nav>
@@ -480,7 +481,6 @@
   };
 
   const renderMissingProduct = () => {
-    const isTruckRoute = routeBase === "heavy-truck-parts";
     productDetailRoot.innerHTML = `
       <section class="product-not-found">
         <div class="container">
@@ -488,8 +488,8 @@
           <h1>Product Not Found</h1>
           <p>This product detail template is ready for centralized demo products and future imported product data.</p>
           <div class="content-actions">
-            <a class="button button-primary" href="${escapeHtml(localUrl(isTruckRoute ? "/heavy-truck-parts/" : "/car-parts/"))}">
-              <span>BACK TO ${isTruckRoute ? "TRUCK" : "CAR"} PARTS</span>
+            <a class="button button-primary" href="${escapeHtml(localUrl("/products/"))}">
+              <span>BACK TO PRODUCTS</span>
               <span class="button-arrow" aria-hidden="true">→</span>
             </a>
             <a class="button button-secondary" href="${escapeHtml(localUrl("/request-part/"))}">

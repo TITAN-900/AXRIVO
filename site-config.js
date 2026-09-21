@@ -14,6 +14,7 @@
     businessHours: "PLACEHOLDER_BUSINESS_HOURS",
     routes: {
       home: "/",
+      products: "/products/",
       carParts: "/car-parts/",
       truckParts: "/heavy-truck-parts/",
       brands: "/brands/",
