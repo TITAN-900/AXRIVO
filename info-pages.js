@@ -30,11 +30,11 @@
 
   const pages = {
     about: {
-      title: "About AXRIVO",
-      eyebrow: "About",
-      heading: "BUILT FOR EVERY ROAD.",
+      title: "About AXRIVO | Automotive Maintenance Essentials",
+      eyebrow: "About AXRIVO",
+      heading: "ABOUT AXRIVO",
       description:
-        "AXRIVO is built to make automotive and heavy vehicle parts easier to find, understand and source.",
+        "Learn about AXRIVO, a Malaysia-based automotive parts brand focused on everyday maintenance essentials, local sourcing and straightforward buying.",
       canonical: "/about/"
     },
     contact: {
@@ -149,63 +149,110 @@
   `;
 
   const renderAbout = () => `
-    ${renderHero()}
-    <section class="content-section">
-      <div class="container content-split">
-        <figure class="content-media">
-          <img src="${escapeHtml(localUrl("/assets/about/axrivo-brand-story.svg"))}" alt="AXRIVO spare parts and warehouse placeholder" loading="lazy" decoding="async" />
+    <section class="about-editorial-intro" aria-labelledby="about-page-title">
+      <div class="container">
+        <nav class="product-breadcrumb" aria-label="Breadcrumb">
+          <a href="${escapeHtml(localUrl("/"))}">Home</a>
+          <span aria-hidden="true">/</span>
+          <span>About AXRIVO</span>
+        </nav>
+        <p class="commerce-kicker"><span>//</span> About AXRIVO</p>
+        <h1 id="about-page-title">ABOUT AXRIVO</h1>
+      </div>
+    </section>
+
+    <section class="about-story-section about-story-light" aria-labelledby="about-essentials-title">
+      <div class="container about-story-grid about-story-text-first">
+        <div class="about-story-copy">
+          <span class="about-story-index" aria-hidden="true">01</span>
+          <h2 id="about-essentials-title">EVERYDAY PARTS.<br />READY WHEN YOU NEED THEM.</h2>
+          <p>
+            AXRIVO is a Malaysia-based automotive parts brand focused on everyday maintenance products and consumables for drivers who value reliable quality, straightforward buying and fast availability.
+          </p>
+          <p>
+            We start with the essentials &mdash; products such as coolant, grease and other frequently used automotive maintenance items &mdash; sourced through local Malaysian suppliers to keep supply practical, responsive and dependable.
+          </p>
+        </div>
+        <figure class="about-story-media">
+          <img
+            src="${escapeHtml(localUrl("/assets/images/about/about-maintenance-essentials.webp"))}"
+            alt="Automotive maintenance essentials and consumables"
+            width="1448"
+            height="1086"
+            loading="eager"
+            decoding="async"
+          />
         </figure>
-        <div class="content-copy">
-          <p class="commerce-kicker"><span>//</span> AXRIVO Platform</p>
-          <h2>A CLEANER WAY TO SOURCE PARTS.</h2>
+      </div>
+    </section>
+
+    <section class="about-story-section about-story-dark" aria-labelledby="about-sourcing-title">
+      <div class="container about-story-grid about-story-media-first">
+        <figure class="about-story-media">
+          <img
+            src="${escapeHtml(localUrl("/assets/images/about/about-local-sourcing.webp"))}"
+            alt="Local automotive parts sourcing and fulfilment"
+            width="1448"
+            height="1086"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+        <div class="about-story-copy">
+          <span class="about-story-index" aria-hidden="true">02</span>
+          <h2 id="about-sourcing-title">RELIABLE PRODUCTS.<br />LOCAL SOURCING.</h2>
+          <p>We believe automotive maintenance should not be complicated.</p>
           <p>
-            From passenger vehicles to heavy trucks, AXRIVO keeps product information, vehicle compatibility and direct enquiry in one simple experience.
+            Our focus is simple: source products with consistent quality, keep the buying experience clear, and get the right products moving quickly when customers need them.
           </p>
           <p>
-            This page is ready for real company story content later. Current copy intentionally avoids fake history, fake certifications or fake operational claims.
+            By working primarily with local suppliers in Malaysia, AXRIVO is able to respond faster while maintaining closer control over the products we offer.
           </p>
-          <div class="brand-summary-grid">
-            <div><span>Vehicle Worlds</span><strong>Car / Heavy Truck</strong></div>
-            <div><span>Product Flow</span><strong>Search / Filter / Enquire</strong></div>
-            <div><span>Data Ready</span><strong>OEM / Engine / Fitment</strong></div>
-          </div>
         </div>
       </div>
     </section>
-    <section class="content-section about-why-section">
-      <div class="container">
-        <div class="parts-section-header">
-          <p class="commerce-kicker"><span>//</span> AXRIVO Advantage</p>
-          <div>
-            <h2>WHY AXRIVO</h2>
-            <p>Focused support for automotive and heavy vehicle part enquiries.</p>
-          </div>
+
+    <section class="about-story-section about-story-light" aria-labelledby="about-buying-title">
+      <div class="container about-story-grid about-story-text-first">
+        <div class="about-story-copy">
+          <span class="about-story-index" aria-hidden="true">03</span>
+          <h2 id="about-buying-title">SIMPLE TO FIND.<br />EASY TO BUY.</h2>
+          <p>AXRIVO is designed for everyday vehicle owners, not just automotive professionals.</p>
+          <p>Clear products. Clear information. No unnecessary complexity.</p>
+          <p>
+            For available stock, we aim to process and arrange delivery as quickly as possible, with selected local orders targeted for delivery within 24 hours.
+          </p>
         </div>
-        <div class="why-grid">
-          <article class="why-item">
-            <span class="why-number">01</span>
-            <span class="why-slash" aria-hidden="true"></span>
-            <h3>PRECISE FITMENT</h3>
-            <p>Parts selected for the right vehicle application.</p>
-          </article>
-          <article class="why-item">
-            <span class="why-number">02</span>
-            <span class="why-slash" aria-hidden="true"></span>
-            <h3>CAR &amp; HEAVY TRUCK</h3>
-            <p>One platform for passenger and heavy vehicle parts.</p>
-          </article>
-          <article class="why-item">
-            <span class="why-number">03</span>
-            <span class="why-slash" aria-hidden="true"></span>
-            <h3>RELIABLE SOURCING</h3>
-            <p>Built around consistent product information and supply.</p>
-          </article>
-          <article class="why-item">
-            <span class="why-number">04</span>
-            <span class="why-slash" aria-hidden="true"></span>
-            <h3>FAST ENQUIRY</h3>
-            <p>Send your part number, OEM number or photo directly to us.</p>
-          </article>
+        <figure class="about-story-media">
+          <img
+            src="${escapeHtml(localUrl("/assets/images/about/about-easy-maintenance.webp"))}"
+            alt="Everyday vehicle maintenance with coolant service"
+            width="1448"
+            height="1086"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+      </div>
+    </section>
+
+    <section class="about-closing-banner" aria-labelledby="about-closing-title">
+      <img
+        src="${escapeHtml(localUrl("/assets/images/about/about-closing-banner.webp"))}"
+        alt="AXRIVO automotive maintenance and supply environment"
+        width="1672"
+        height="941"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="about-closing-overlay" aria-hidden="true"></div>
+      <div class="container about-closing-inner">
+        <div class="about-closing-copy">
+          <p class="commerce-kicker"><span>//</span> AXRIVO</p>
+          <h2 id="about-closing-title">KEEPING EVERYDAY<br />MAINTENANCE MOVING.</h2>
+          <p>
+            Reliable automotive consumables and maintenance essentials, sourced locally for drivers who value speed, consistency and simplicity.
+          </p>
         </div>
       </div>
     </section>
