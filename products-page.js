@@ -12,24 +12,15 @@
   const localUrl = ui.localUrl;
   const params = new URLSearchParams(window.location.search);
   const state = {
-    q: params.get("q") ?? "",
-    category: params.get("category") ?? "",
-    vehicleBrand: params.get("vehicleBrand") ?? "",
-    engineModel: params.get("engineModel") ?? "",
-    sort: params.get("sort") ?? "relevance"
+    q: params.get("q") ?? ""
   };
-
-  const option = (value, label, selected) =>
-    `<option value="${escapeHtml(value)}"${value === selected ? " selected" : ""}>${escapeHtml(label)}</option>`;
 
   const updateUrl = () => {
     const next = new URLSearchParams();
 
-    Object.entries(state).forEach(([key, value]) => {
-      if (value && !(key === "sort" && value === "relevance")) {
-        next.set(key, value);
-      }
-    });
+    if (state.q) {
+      next.set("q", state.q);
+    }
 
     const query = next.toString();
     window.history.replaceState({}, "", localUrl(`/products/${query ? `?${query}` : ""}`));
@@ -37,19 +28,13 @@
 
   const getResults = () =>
     catalog.searchProducts({
-      query: state.q,
-      filters: {
-        category: state.category,
-        vehicleBrand: state.vehicleBrand,
-        engineModel: state.engineModel
-      },
-      sort: state.sort
+      query: state.q
     });
 
   const setPageMetadata = (results) => {
     const description = state.q
-      ? `Browse AXRIVO product results for ${state.q}, including OEM, part number, vehicle and engine information.`
-      : "Browse AXRIVO automotive and heavy vehicle parts by product category, OEM number, part number, brand, vehicle or engine.";
+      ? `Browse AXRIVO product results for ${state.q} by product name, part number or OEM number.`
+      : "Browse AXRIVO automotive and heavy vehicle parts by product name, part number or OEM number.";
     const canonical = helpers?.absoluteUrl("/products/") ?? "/products/";
 
     document.title = state.q ? `${state.q} Products | AXRIVO` : "Products | AXRIVO Automotive & Heavy Vehicle Parts";
@@ -81,19 +66,8 @@
     }
   };
 
-  const renderFilterSelect = ({ label, name, options, selected }) => `
-    <label class="catalog-filter-field">
-      <span>${escapeHtml(label)}</span>
-      <select class="catalog-select" name="${escapeHtml(name)}">
-        ${options.map(({ value, label: itemLabel }) => option(value, itemLabel, selected)).join("")}
-      </select>
-    </label>`;
-
   const render = () => {
     const results = getResults();
-    const allProducts = catalog.getProducts();
-    const filterOptions = catalog.getFilterOptions(allProducts);
-    const categories = catalog.getCategories();
 
     setPageMetadata(results);
 
@@ -108,64 +82,21 @@
           <div class="catalog-hero-copy">
             <p class="commerce-kicker"><span>//</span> Complete Parts Catalog</p>
             <h1>PRODUCTS</h1>
-            <p>Find parts by product name, OEM number, part number, vehicle or engine.</p>
+            <p>Find parts by product name, part number or OEM number.</p>
           </div>
           <form class="part-search catalog-search-form" action="${escapeHtml(localUrl("/products/"))}" data-products-search-form>
             <label class="sr-only" for="products-search-input">Search AXRIVO products</label>
             <div class="part-search-field">
               <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m16.5 16.5 4 4"></path></svg>
-              <input id="products-search-input" name="q" type="search" value="${escapeHtml(state.q)}" placeholder="Search Part Number, OEM, Product, Vehicle or Engine..." />
+              <input id="products-search-input" name="q" type="search" value="${escapeHtml(state.q)}" placeholder="Search Product Name, Part Number or OEM..." />
             </div>
             <button class="part-search-button" type="submit"><span>SEARCH</span><span class="finder-arrow" aria-hidden="true">→</span></button>
           </form>
         </div>
       </section>
 
-      <section class="catalog-section" id="categories">
-        <div class="container catalog-layout">
-          <aside class="catalog-filter-panel" aria-label="Product filters">
-            <div><p class="commerce-kicker"><span>//</span> Browse</p><h2>FILTER PRODUCTS</h2></div>
-            <form class="filter-grid" data-products-filter-form>
-              ${renderFilterSelect({
-                label: "Category",
-                name: "category",
-                selected: state.category,
-                options: [{ value: "", label: "All Categories" }, ...categories.map((category) => ({ value: category.slug, label: category.name }))]
-              })}
-              ${renderFilterSelect({
-                label: "Vehicle Brand",
-                name: "vehicleBrand",
-                selected: state.vehicleBrand,
-                options: [{ value: "", label: "All Brands" }, ...filterOptions.vehicleBrands.map((brand) => ({ value: brand, label: brand }))]
-              })}
-              ${renderFilterSelect({
-                label: "Engine",
-                name: "engineModel",
-                selected: state.engineModel,
-                options: [{ value: "", label: "All Engines" }, ...filterOptions.engineModels.map((engine) => ({ value: engine, label: engine }))]
-              })}
-              ${renderFilterSelect({
-                label: "Sort",
-                name: "sort",
-                selected: state.sort,
-                options: [
-                  { value: "relevance", label: "Relevance" },
-                  { value: "newest", label: "Newest" },
-                  { value: "az", label: "A-Z" }
-                ]
-              })}
-            </form>
-            <div class="related-category-list products-category-links">
-              <span>Categories</span>
-              ${categories
-                .map(
-                  (category) =>
-                    `<a href="${escapeHtml(localUrl(`/products/?category=${encodeURIComponent(category.slug)}`))}"${state.category === category.slug ? ' aria-current="page"' : ""}>${escapeHtml(category.name)}</a>`
-                )
-                .join("")}
-            </div>
-          </aside>
-
+      <section class="catalog-section" id="products-grid">
+        <div class="container products-grid-shell">
           <div class="catalog-results">
             <div class="catalog-results-head">
               <p>${results.length} product${results.length === 1 ? "" : "s"}</p>
@@ -173,7 +104,7 @@
             </div>
             ${
               results.length
-                ? `<div class="product-grid catalog-product-grid">${results.map((product) => ui.renderProductCard(product)).join("")}</div>`
+                ? `<div class="product-grid catalog-product-grid">${results.map((product) => ui.renderProductCard(product, { compactMeta: true })).join("")}</div>`
                 : `<div class="empty-state">
                     <p class="commerce-kicker"><span>//</span> No Match</p>
                     <h2>WE COULDN'T FIND THAT PART.</h2>
@@ -192,16 +123,6 @@
     root.querySelector("[data-products-search-form]")?.addEventListener("submit", (event) => {
       event.preventDefault();
       state.q = root.querySelector("#products-search-input")?.value.trim() ?? "";
-      updateUrl();
-      render();
-    });
-
-    root.querySelector("[data-products-filter-form]")?.addEventListener("change", (event) => {
-      if (!event.target.name) {
-        return;
-      }
-
-      state[event.target.name] = event.target.value;
       updateUrl();
       render();
     });

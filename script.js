@@ -192,8 +192,8 @@ const renderProductCard = (product, options = {}) => {
         <h3>${escapeHtml(product.name)}</h3>
         <span class="product-meta">
           <span>OEM / Part Number: ${escapeHtml(oemText)} / ${escapeHtml(product.partNumber ?? product.sku ?? "")}</span>
-          ${categoryName ? `<span>Category: ${escapeHtml(categoryName)}</span>` : ""}
-          ${secondaryMeta ? `<span>${escapeHtml(secondaryMeta)}</span>` : ""}
+          ${!options.compactMeta && categoryName ? `<span>Category: ${escapeHtml(categoryName)}</span>` : ""}
+          ${!options.compactMeta && secondaryMeta ? `<span>${escapeHtml(secondaryMeta)}</span>` : ""}
         </span>
         <span class="product-link">View Details <span aria-hidden="true">→</span></span>
       </span>
@@ -241,10 +241,7 @@ const normalizeUnifiedProductNavigation = () => {
 
     links
       .filter((link) => routeForLink(link).startsWith("/car-parts/") || routeForLink(link).startsWith("/heavy-truck-parts/"))
-      .forEach((link) => {
-        link.href = localUrl("/products/#categories");
-        link.textContent = "Categories";
-      });
+      .forEach((link) => link.remove());
   });
 };
 

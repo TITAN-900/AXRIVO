@@ -3945,28 +3945,6 @@ html.js-ready [data-scroll-section].is-visible .part-five-reveal:nth-child(4) {
   --brand-logo-height: 58px;
 }
 
-@media (min-width: 700px) and (max-width: 979px) {
-  .products-page .catalog-layout {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .products-page .catalog-filter-panel {
-    position: static;
-  }
-
-  .products-page .filter-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .products-page .products-category-links {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .products-page .products-category-links > span {
-    grid-column: 1 / -1;
-  }
-}
-
 @media (max-width: 699px) {
   .parts-page-car .parts-brand-list {
     grid-template-columns: 1fr;

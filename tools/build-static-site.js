@@ -135,7 +135,7 @@ const generateUnifiedProductPages = () => {
               /\s*<a href="[^"]+">Car Parts<\/a>\s*<a href="[^"]+">Heavy Truck Parts<\/a>/g,
               '\n              <a href="../../../products/index.html">Products</a>'
             )
-            .replace(/href="[^"]*engine-parts\/index\.html">Categories/g, 'href="../../../products/index.html#categories">Categories');
+            .replace(/\s*<a href="[^"]*engine-parts\/index\.html">Categories<\/a>/g, "");
           fs.writeFileSync(htmlPath, html, "utf8");
         }
       });
